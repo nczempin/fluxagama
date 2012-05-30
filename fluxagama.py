@@ -1,13 +1,13 @@
-import pygame, sys, os, random
+import pygame, os
 from pygame.locals import *
 
-def load_image(file):
+def load_image(filename):
     "loads an image, prepares it for play"
-    file = os.path.join("data", file)
+    filename = os.path.join("data", filename)
     try:
-        surface = pygame.image.load(file)
+        surface = pygame.image.load(filename)
     except pygame.error:
-        raise SystemExit, 'Could not load image "%s" %s'%(file, pygame.get_error())
+        raise SystemExit, 'Could not load image "%s" %s' % (filename, pygame.get_error())
     return surface
 
  
@@ -24,15 +24,15 @@ screen = pygame.display.get_surface()
 class dummysound:
     def play(self): pass
     
-def load_sound(file):
+def load_sound(filename):
     if not pygame.mixer: return dummysound()
     print "Lade Sound"
-    file = os.path.join("data", file)
+    filename = os.path.join("data", filename)
     try:
-        sound = pygame.mixer.Sound(file)
+        sound = pygame.mixer.Sound(filename)
         return sound
     except pygame.error:
-        print 'Warning, unable to load,', file
+        print 'Warning, unable to load,', filename
     return dummysound()
 
 shoot_sound = load_sound('Schuss.wav')
@@ -68,75 +68,71 @@ enemy0_exists = True
 
 
 def input(events):
-   global ship_coorX
-   global ship_coorY  
-   global shot_exists
-   global shot_coorX
-   global shot_coorY
-   keystate = pygame.key.get_pressed()
-
-   if keystate[K_w] == 1:
-         print "W"
-         ship_coorY -= 1
-   if keystate[K_a] == 1:
-         print "A"
-         ship_coorX -= 1
-   if keystate[K_s] == 1:
-         print "S"
-         ship_coorY += 1
-   if keystate[K_d] == 1:
-         print "D"
-         ship_coorX += 1
-
-   
-   for event in events: 
-      if event.type == QUIT:# or
-      #if event.key == K_ESCAPE: 
-         return True
-      elif event.type == KEYDOWN:
-         print event.scancode
-         if event.scancode == 57 and not shot_exists:
-            shoot_sound.play()
-            shot_exists = True
-            shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY
+    global ship_coorX
+    global ship_coorY  
+    global shot_exists
+    global shot_coorX
+    global shot_coorY
+    keystate = pygame.key.get_pressed()
+    
+    if keystate[K_w] == 1:
+        print "W"
+        ship_coorY -= 1
+    if keystate[K_a] == 1:
+        print "A"
+        ship_coorX -= 1
+    if keystate[K_s] == 1:
+        print "S"
+        ship_coorY += 1
+    if keystate[K_d] == 1:
+        print "D"
+        ship_coorX += 1
+    for event in events: 
+        if event.type == QUIT:# or
+        #if event.key == K_ESCAPE: 
+            return True
+        elif event.type == KEYDOWN:
+            print event.scancode
+            if event.scancode == 57 and not shot_exists:
+                shoot_sound.play()
+                shot_exists = True
+                shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY
             
       
 done = False
 try:
-   while not done:
-      screen.fill((0, 0, 0))
+    while not done:
+        screen.fill((0, 0, 0))
+        
+        if enemy0_exists:
+            if enemy0_coorY + enemy0Y < shot_coorY:
+                None
+            elif enemy0_coorY > shot_coorY + shotY:
+                None
+            elif enemy0_coorX > shot_coorX + shotX:
+                None
+            elif enemy0_coorX + enemy0X < shot_coorX:
+                None
+            else:
+                enemy0_exists = False
+                shot_exists = False
 
-      if enemy0_exists:
-          if enemy0_coorY + enemy0Y < shot_coorY:
-              None
-          elif enemy0_coorY > shot_coorY + shotY:
-              None
-          elif enemy0_coorX > shot_coorX + shotX:
-              None
-          elif enemy0_coorX +  enemy0X < shot_coorX:
-              None
-          else:
-              enemy0_exists = False
-              shot_exists = False
-
-      if shot_exists:
-         screen.blit (shot_surface, (shot_coorX, shot_coorY))
-         shot_coorY -= 1
-         if shot_coorY <= 0:
-            shot_exists = False
+        if shot_exists:
+            screen.blit (shot_surface, (shot_coorX, shot_coorY))
+            shot_coorY -= 1
+            if shot_coorY <= 0:
+                shot_exists = False
 
 
 
-      if enemy0_exists == True:
-          screen.blit (enemy0_surface, (enemy0_coorX, enemy0_coorY))
+        if enemy0_exists == True:
+            screen.blit (enemy0_surface, (enemy0_coorX, enemy0_coorY))
       
-      screen.blit (ship_surface, (ship_coorX, ship_coorY))
+        screen.blit (ship_surface, (ship_coorX, ship_coorY))
 
     
-      pygame.display.flip()
-      done = input(pygame.event.get())
+        pygame.display.flip()
+        done = input(pygame.event.get())
 except:
-      print 'Warning, Error,', file
+    print 'Warning, Error,', file
 pygame.quit()
-
-
