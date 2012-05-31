@@ -61,8 +61,8 @@ pygame.init()
 if pygame.mixer and not pygame.mixer.get_init():
     print 'Warning, no sound'
     pygame.mixer = None
-screenX = 800
-screenY = 600
+screenX = 672
+screenY = 768
 window = pygame.display.set_mode((screenX, screenY)) 
 pygame.display.set_caption('LOLOLOL') 
 screen = pygame.display.get_surface()
