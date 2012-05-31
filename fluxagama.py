@@ -110,7 +110,7 @@ try:
             if shot_coorY <= 0:
                 shot_exists = False
 
-        if enemy0_exists == True:
+        if enemy0_exists:
             screen.blit (enemy0_surface, (enemy0_coorX, enemy0_coorY))
       
         screen.blit (ship_surface, (ship_coorX, ship_coorY))
