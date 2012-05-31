@@ -68,7 +68,7 @@ pygame.display.set_caption('LOLOLOL')
 screen = pygame.display.get_surface()
 
 
-shoot_sound = load_sound('_Schuss.wav')
+shoot_sound = load_sound('psh.ogg')
 
 ship_surface = load_image("Flieger.png")
 shot_surface = load_image("Schuss.png")
