@@ -55,6 +55,8 @@ def handle_input(events):
                 shoot_sound.play()
                 shot_exists = True
                 shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY
+                
+# Main program starts here
 pygame.init()
 if pygame.mixer and not pygame.mixer.get_init():
     print 'Warning, no sound'
@@ -88,11 +90,15 @@ enemy0_coorY = 20
 shot_exists = False
 enemy0_exists = True
 done = False
+
+# Main game loop
 try:
     while not done:
+        # draw black background
         screen.fill((0, 0, 0))
         
         if enemy0_exists:
+            # collision detection shot <-> enemy
             if enemy0_coorY + enemy0Y < shot_coorY:
                 None
             elif enemy0_coorY > shot_coorY + shotY:
@@ -102,20 +108,27 @@ try:
             elif enemy0_coorX + enemy0X < shot_coorX:
                 None
             else:
+                # Collision!
                 enemy0_exists = False
                 shot_exists = False
+                # TODO: enemy explosion
         if shot_exists:
+            # draw and move shot
             screen.blit (shot_surface, (shot_coorX, shot_coorY))
             shot_coorY -= 1
             if shot_coorY <= 0:
                 shot_exists = False
 
         if enemy0_exists:
+            # draw enemy TODO move enemy
             screen.blit (enemy0_surface, (enemy0_coorX, enemy0_coorY))
       
+        # draw player ship
         screen.blit (ship_surface, (ship_coorX, ship_coorY))
-    
+
+        # swap baCK AND FRONT BUFFERS
         pygame.display.flip()
+        # read keyboard and move player ship
         done = handle_input(pygame.event.get())
 except:
     print 'Warning, Error,', file
