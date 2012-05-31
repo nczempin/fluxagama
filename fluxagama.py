@@ -45,17 +45,20 @@ def handle_input(events):
     if keystate[K_d] == 1:
         print "D"
         ship_coorX += 1
+    if keystate[K_SPACE] == 1:
+        if not shot_exists:
+            shoot_sound.play()
+            shot_exists = True
+            shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY
+
     for event in events: 
         if event.type == QUIT:# or
         #if event.key == K_ESCAPE: 
             return True
-        elif event.type == KEYDOWN:
-            print event.scancode
-            if event.scancode == 57 and not shot_exists:
-                shoot_sound.play()
-                shot_exists = True
-                shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY
-                
+#        elif event.type == KEYDOWN:
+#            print event.scancode
+#            if event.scancode == 57 and not shot_exists:
+                 
 # Main program starts here
 pygame.init()
 if pygame.mixer and not pygame.mixer.get_init():
