@@ -60,6 +60,7 @@ def handle_input(events):
 #            if event.scancode == 57 and not shot_exists:
                  
 # Main program starts here
+pygame.mixer.pre_init(frequency=22050, size=-16, channels=2, buffer=512)
 pygame.init()
 if pygame.mixer and not pygame.mixer.get_init():
     print 'Warning, no sound'
