@@ -134,7 +134,7 @@ try:
             # draw and move shot
             screen.blit (shot_surface, (shot_coorX, shot_coorY))
             shot_coorY -= 1
-            if shot_coorY <= 0:
+            if shot_coorY <= UPPER_BORDER:
                 shot_exists = False
 
         if enemy0_exists:
