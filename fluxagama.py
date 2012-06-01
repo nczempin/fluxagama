@@ -100,7 +100,6 @@ ticks = 0
 # Main game loop
 try:
     while not done:
-        # clip to 60 fps
         clock.tick()
         ticks += 1
         if (ticks % 1000)==0:
