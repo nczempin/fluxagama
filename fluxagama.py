@@ -72,6 +72,12 @@ pygame.display.set_caption('Fluxagama')
 screen = pygame.display.get_surface()
 
 
+LEFT_BORDER = 0
+RIGHT_BORDER = screenX
+LOWER_BORDER = screenY
+UPPER_BORDER = 0
+
+
 shoot_sound = load_sound('psh.ogg')
 enemy_explosion_sound = load_sound('woodoweeooh.ogg')
 
