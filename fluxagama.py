@@ -73,6 +73,7 @@ screen = pygame.display.get_surface()
 
 
 shoot_sound = load_sound('psh.ogg')
+enemy_explosion_sound = load_sound('woodoweeooh.ogg')
 
 ship_surface = load_image("Flieger.png")
 shot_surface = load_image("Schuss.png")
@@ -117,6 +118,7 @@ try:
                 # Collision!
                 enemy0_exists = False
                 shot_exists = False
+                enemy_explosion_sound.play()
                 # TODO: enemy explosion
         if shot_exists:
             # draw and move shot
