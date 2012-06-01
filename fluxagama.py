@@ -76,7 +76,7 @@ shoot_sound = load_sound('psh.ogg')
 enemy_explosion_sound = load_sound('woodoweeooh.ogg')
 
 ship_surface = load_image("gun.png")
-shot_surface = load_image("Schuss.png")
+shot_surface = load_image("shot.png")
 enemy0_surface = load_image("UFO.png")
 
 shipX, shipY = ship_surface.get_size()
