@@ -95,12 +95,17 @@ enemy0_coorY = 20
 shot_exists = False
 enemy0_exists = True
 done = False
-#clock = pygame.time.Clock()
+clock = pygame.time.Clock()
+ticks = 0
 # Main game loop
 try:
     while not done:
         # clip to 60 fps
-        #clock.tick(60)
+        clock.tick()
+        ticks += 1
+        if (ticks % 1000)==0:
+            fps = clock.get_fps()
+            print fps
         # draw black background
         screen.fill((0, 0, 0))
         
