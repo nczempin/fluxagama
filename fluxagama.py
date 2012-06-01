@@ -68,7 +68,7 @@ if pygame.mixer and not pygame.mixer.get_init():
 screenX = 672
 screenY = 768
 window = pygame.display.set_mode((screenX, screenY)) 
-pygame.display.set_caption('LOLOLOL') 
+pygame.display.set_caption('Fluxagama') 
 screen = pygame.display.get_surface()
 
 
