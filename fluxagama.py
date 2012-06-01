@@ -26,11 +26,14 @@ def load_sound(filename):
  
 
 def handle_input(events):
+    #TODO: too many globals
     global ship_coorX
-    global ship_coorY  
+    global ship_coorY
+    global shipX  
     global shot_exists
     global shot_coorX
     global shot_coorY
+    global BORDER_LEFT
     keystate = pygame.key.get_pressed()
     
 #    if keystate[K_w] == 1:
@@ -38,13 +41,15 @@ def handle_input(events):
 #        ship_coorY -= 1
     if keystate[K_a] == 1:
         #print "A"
-        ship_coorX -= 1
+        if ship_coorX > BORDER_LEFT:
+            ship_coorX -= 1
 #    if keystate[K_s] == 1:
 #        #print "S"
 #        ship_coorY += 1
     if keystate[K_d] == 1:
         #print "D"
-        ship_coorX += 1
+        if ship_coorX + shipX < BORDER_RIGHT:
+            ship_coorX += 1
     if keystate[K_SPACE] == 1:
         if not shot_exists:
             shoot_sound.play()
@@ -72,10 +77,10 @@ pygame.display.set_caption('Fluxagama')
 screen = pygame.display.get_surface()
 
 
-LEFT_BORDER = 0
-RIGHT_BORDER = screenX
-LOWER_BORDER = screenY
-UPPER_BORDER = 0
+BORDER_LEFT = 0
+BORDER_RIGHT = screenX
+BORDER_LOWER = screenY
+BORDER_UPPER = 0
 
 
 shoot_sound = load_sound('psh.ogg')
@@ -134,7 +139,7 @@ try:
             # draw and move shot
             screen.blit (shot_surface, (shot_coorX, shot_coorY))
             shot_coorY -= 1
-            if shot_coorY <= UPPER_BORDER:
+            if shot_coorY <= BORDER_UPPER:
                 shot_exists = False
 
         if enemy0_exists:
