@@ -106,8 +106,16 @@ enemy0_coorY = 20
 shot_exists = False
 enemy0_exists = True
 done = False
+
 clock = pygame.time.Clock()
 ticks = 0
+
+font = pygame.font.Font(None, 36)
+text = font.render("Hello There", 1, (200, 200, 200))
+textpos = text.get_rect()
+textpos.centerx = screen.get_rect().centerx
+
+
 # Main game loop
 try:
     while not done:
@@ -118,7 +126,8 @@ try:
             print fps
         # draw black background
         screen.fill((0, 0, 0))
-        
+        screen.blit(text, textpos)
+       
         if enemy0_exists:
             # collision detection shot <-> enemy
             if enemy0_coorY + enemy0Y < shot_coorY:
