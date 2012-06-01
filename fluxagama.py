@@ -34,16 +34,16 @@ def handle_input(events):
     keystate = pygame.key.get_pressed()
     
     if keystate[K_w] == 1:
-        print "W"
+        #print "W"
         ship_coorY -= 1
     if keystate[K_a] == 1:
-        print "A"
+        #print "A"
         ship_coorX -= 1
     if keystate[K_s] == 1:
-        print "S"
+        #print "S"
         ship_coorY += 1
     if keystate[K_d] == 1:
-        print "D"
+        #print "D"
         ship_coorX += 1
     if keystate[K_SPACE] == 1:
         if not shot_exists:
