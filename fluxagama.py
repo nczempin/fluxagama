@@ -75,7 +75,7 @@ screen = pygame.display.get_surface()
 shoot_sound = load_sound('psh.ogg')
 enemy_explosion_sound = load_sound('woodoweeooh.ogg')
 
-ship_surface = load_image("Flieger.png")
+ship_surface = load_image("gun.png")
 shot_surface = load_image("Schuss.png")
 enemy0_surface = load_image("UFO.png")
 
