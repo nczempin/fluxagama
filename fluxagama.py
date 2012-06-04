@@ -59,8 +59,10 @@ ship_coorY = BORDER_LOWER - shipY
 shot_coorX = 0
 shot_coorY = 0
 
-enemy0_coorX = 300
-enemy0_coorY = BORDER_UPPER
+#converted enemy x and y to first and second item in enemies[0]
+#enemy0_coorX = 300
+#enemy0_coorY = BORDER_UPPER
+enemies = [[300,BORDER_UPPER]]
 
 shot_exists = False
 enemy0_exists = True
@@ -93,13 +95,13 @@ try:
        
         if enemy0_exists:
             # collision detection shot <-> enemy
-            if enemy0_coorY + enemy0Y < shot_coorY:
+            if enemies[0][1] + enemy0Y < shot_coorY:
                 pass
-            elif enemy0_coorY > shot_coorY + shotY:
+            elif enemies[0][1] > shot_coorY + shotY:
                 pass
-            elif enemy0_coorX > shot_coorX + shotX:
+            elif enemies[0][0] > shot_coorX + shotX:
                 pass
-            elif enemy0_coorX + enemy0X < shot_coorX:
+            elif enemies[0][0] + enemy0X < shot_coorX:
                 pass
             else:
                 # Collision!
@@ -116,7 +118,7 @@ try:
 
         if enemy0_exists:
             # draw enemy TODO move enemy
-            screen.blit (enemy0_surface, (enemy0_coorX, enemy0_coorY))
+            screen.blit (enemy0_surface, (enemies[0][0], enemies[0][1]))
       
         # draw player ship
         screen.blit (ship_surface, (ship_coorX, ship_coorY))
