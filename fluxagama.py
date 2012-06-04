@@ -24,9 +24,10 @@ def load_sound(filename):
     return dummysound()
 def generate_enemy_wave(enemies):
     global BORDER_UPPER
-    for i in range(13):
-        position = [10+i*50, BORDER_UPPER+80]
-        enemies.append(position)
+    for i in range(5):
+        for j in range(11):
+            position = [60+j*50, BORDER_UPPER+80+i*40]
+            enemies.append(position)
 # Main program starts here
 pygame.mixer.pre_init(frequency=22050, size=-16, channels=2, buffer=512)
 pygame.init()
