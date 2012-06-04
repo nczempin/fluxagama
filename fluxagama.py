@@ -79,8 +79,8 @@ screen = pygame.display.get_surface()
 
 BORDER_LEFT = 0
 BORDER_RIGHT = screenX
-BORDER_LOWER = screenY
-BORDER_UPPER = 0
+BORDER_LOWER = screenY-100
+BORDER_UPPER = 100
 
 
 shoot_sound = load_sound('psh.ogg')
@@ -95,13 +95,13 @@ shotX, shotY = shot_surface.get_size()
 enemy0X, enemy0Y = enemy0_surface.get_size()
 
 ship_coorX = (screenX - shipX) / 2
-ship_coorY = screenY - shipY -100
+ship_coorY = BORDER_LOWER - shipY
 
 shot_coorX = 0
 shot_coorY = 0
 
 enemy0_coorX = 300
-enemy0_coorY = 120
+enemy0_coorY = BORDER_UPPER
 
 shot_exists = False
 enemy0_exists = True
