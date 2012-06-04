@@ -22,7 +22,11 @@ def load_sound(filename):
     except pygame.error:
         print 'Warning, unable to load,', filename
     return dummysound()
-                
+def generate_enemy_wave(enemies):
+    global BORDER_UPPER
+    for i in range(13):
+        position = [10+i*50, BORDER_UPPER+80]
+        enemies.append(position)
 # Main program starts here
 pygame.mixer.pre_init(frequency=22050, size=-16, channels=2, buffer=512)
 pygame.init()
@@ -59,10 +63,8 @@ ship_coorY = BORDER_LOWER - shipY
 shot_coorX = 0
 shot_coorY = 0
 
-#converted enemy x and y to first and second item in enemies[0]
-#enemy0_coorX = 300
-#enemy0_coorY = BORDER_UPPER
-enemies = [[300,BORDER_UPPER],[400,BORDER_UPPER]]
+enemies = []
+generate_enemy_wave(enemies)
 
 shot_exists = False
 enemy0_exists = True
@@ -113,6 +115,11 @@ while not done:
     for i in range(len(dying_enemies)):
         del enemies[dying_enemies[i+delta]]
         delta += 1 # each time we remove one, the index of all the others must be reduced. This assumes that the list of dying enemies is sorted
+    if len(enemies)==0:
+        print"whole wave destroyed!"
+        generate_enemy_wave(enemies)
+    
+        
     if shot_exists:
         # draw and move shot
         screen.blit (shot_surface, (shot_coorX, shot_coorY))
@@ -120,10 +127,7 @@ while not done:
         if shot_coorY <= BORDER_UPPER:
             shot_exists = False
 
-    if enemy0_exists:
-        # draw enemy TODO move enemy
-        pass#screen.blit (enemy0_surface, (enemies[0][0], enemies[0][1]))
-  
+ 
     # draw player ship
     screen.blit (ship_surface, (ship_coorX, ship_coorY))
 
