@@ -111,9 +111,11 @@ clock = pygame.time.Clock()
 ticks = 0
 
 font = pygame.font.Font(None, 36)
-text = font.render("SCORE<1>", 1, (200, 200, 200))
-textpos = text.get_rect()
-#textpos.centerx = screen.get_rect().centerx
+score1titletext = font.render("SCORE<1>", 1, (200, 200, 200))
+score1titletextpos = score1titletext.get_rect()
+score1text = font.render("00000", 1, (200, 200, 200))
+score1textpos = score1text.get_rect()
+score1textpos.centery = 36
 
 
 # Main game loop
@@ -126,7 +128,9 @@ try:
             print fps
         # draw black background
         screen.fill((0, 0, 0))
-        screen.blit(text, textpos)
+        #draw text
+        screen.blit(score1titletext, score1titletextpos)
+        screen.blit(score1text, score1textpos)
        
         if enemy0_exists:
             # collision detection shot <-> enemy
