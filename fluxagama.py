@@ -95,13 +95,13 @@ shotX, shotY = shot_surface.get_size()
 enemy0X, enemy0Y = enemy0_surface.get_size()
 
 ship_coorX = (screenX - shipX) / 2
-ship_coorY = screenY - shipY
+ship_coorY = screenY - shipY -100
 
 shot_coorX = 0
 shot_coorY = 0
 
 enemy0_coorX = 300
-enemy0_coorY = 20
+enemy0_coorY = 120
 
 shot_exists = False
 enemy0_exists = True
