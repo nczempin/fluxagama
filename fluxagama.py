@@ -93,16 +93,16 @@ try:
         screen.blit(score1titletext, score1titletextpos)
         screen.blit(score1text, score1textpos)
        
-        if enemy0_exists:
-            screen.blit (enemy0_surface, (enemies[0][0], enemies[0][1]))
+        for i in range(len(enemies)):
+            screen.blit (enemy0_surface, (enemies[i][0], enemies[i][1]))
             # collision detection shot <-> enemy
-            if enemies[0][1] + enemy0Y < shot_coorY:
+            if enemies[i][1] + enemy0Y < shot_coorY:
                 pass
-            elif enemies[0][1] > shot_coorY + shotY:
+            elif enemies[i][1] > shot_coorY + shotY:
                 pass
-            elif enemies[0][0] > shot_coorX + shotX:
+            elif enemies[i][0] > shot_coorX + shotX:
                 pass
-            elif enemies[0][0] + enemy0X < shot_coorX:
+            elif enemies[i][0] + enemy0X < shot_coorX:
                 pass
             else:
                 # Collision!
@@ -151,5 +151,5 @@ try:
     #            if event.scancode == 57 and not shot_exists:
 
 except:
-    print 'Warning, Error,', file
+    print 'Warning, Error'
 pygame.quit()
