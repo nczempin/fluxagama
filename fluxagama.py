@@ -22,48 +22,7 @@ def load_sound(filename):
     except pygame.error:
         print 'Warning, unable to load,', filename
     return dummysound()
-
- 
-
-def handle_input(events):
-    #TODO: too many globals
-    global ship_coorX
-    global ship_coorY
-    global shipX  
-    global shot_exists
-    global shot_coorX
-    global shot_coorY
-    global BORDER_LEFT
-    keystate = pygame.key.get_pressed()
-    
-#    if keystate[K_w] == 1:
-#        #print "W"
-#        ship_coorY -= 1
-    if keystate[K_a] == 1:
-        #print "A"
-        if ship_coorX > BORDER_LEFT:
-            ship_coorX -= 1
-#    if keystate[K_s] == 1:
-#        #print "S"
-#        ship_coorY += 1
-    if keystate[K_d] == 1:
-        #print "D"
-        if ship_coorX + shipX < BORDER_RIGHT:
-            ship_coorX += 1
-    if keystate[K_SPACE] == 1:
-        if not shot_exists:
-            shoot_sound.play()
-            shot_exists = True
-            shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY
-
-    for event in events: 
-        if event.type == QUIT:# or
-        #if event.key == K_ESCAPE: 
-            return True
-#        elif event.type == KEYDOWN:
-#            print event.scancode
-#            if event.scancode == 57 and not shot_exists:
-                 
+                
 # Main program starts here
 pygame.mixer.pre_init(frequency=22050, size=-16, channels=2, buffer=512)
 pygame.init()
@@ -165,7 +124,29 @@ try:
         # swap baCK AND FRONT BUFFERS
         pygame.display.flip()
         # read keyboard and move player ship
-        done = handle_input(pygame.event.get())
+        events = pygame.event.get()
+        keystate = pygame.key.get_pressed()
+    
+        if keystate[K_a] == 1:
+            if ship_coorX > BORDER_LEFT:
+                ship_coorX -= 1
+        if keystate[K_d] == 1:
+            if ship_coorX + shipX < BORDER_RIGHT:
+                ship_coorX += 1
+        if keystate[K_SPACE] == 1:
+            if not shot_exists:
+                shoot_sound.play()
+                shot_exists = True
+                shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY
+    
+        for event in events: 
+            if event.type == QUIT:# or
+            #if event.key == K_ESCAPE: 
+                done= True
+    #        elif event.type == KEYDOWN:
+    #            print event.scancode
+    #            if event.scancode == 57 and not shot_exists:
+
 except:
     print 'Warning, Error,', file
 pygame.quit()
