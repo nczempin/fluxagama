@@ -62,7 +62,7 @@ shot_coorY = 0
 #converted enemy x and y to first and second item in enemies[0]
 #enemy0_coorX = 300
 #enemy0_coorY = BORDER_UPPER
-enemies = [[300,BORDER_UPPER]]
+enemies = [[300,BORDER_UPPER],[400,BORDER_UPPER]]
 
 shot_exists = False
 enemy0_exists = True
@@ -94,6 +94,7 @@ try:
         screen.blit(score1text, score1textpos)
        
         if enemy0_exists:
+            screen.blit (enemy0_surface, (enemies[0][0], enemies[0][1]))
             # collision detection shot <-> enemy
             if enemies[0][1] + enemy0Y < shot_coorY:
                 pass
@@ -118,7 +119,7 @@ try:
 
         if enemy0_exists:
             # draw enemy TODO move enemy
-            screen.blit (enemy0_surface, (enemies[0][0], enemies[0][1]))
+            pass#screen.blit (enemy0_surface, (enemies[0][0], enemies[0][1]))
       
         # draw player ship
         screen.blit (ship_surface, (ship_coorX, ship_coorY))
