@@ -131,13 +131,13 @@ try:
         if enemy0_exists:
             # collision detection shot <-> enemy
             if enemy0_coorY + enemy0Y < shot_coorY:
-                None
+                pass
             elif enemy0_coorY > shot_coorY + shotY:
-                None
+                pass
             elif enemy0_coorX > shot_coorX + shotX:
-                None
+                pass
             elif enemy0_coorX + enemy0X < shot_coorX:
-                None
+                pass
             else:
                 # Collision!
                 enemy0_exists = False
