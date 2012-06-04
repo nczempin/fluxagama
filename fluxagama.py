@@ -43,7 +43,7 @@ BORDER_UPPER = 100
 
 
 shoot_sound = load_sound('psh.ogg')
-enemy_explosion_sound = load_sound('woodoweeooh.ogg')
+enemy_explosion_sound = load_sound('uddh.ogg')
 
 ship_surface = load_image("gun.png")
 shot_surface = load_image("shot.png")
