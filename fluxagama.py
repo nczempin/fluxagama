@@ -111,9 +111,9 @@ clock = pygame.time.Clock()
 ticks = 0
 
 font = pygame.font.Font(None, 36)
-text = font.render("Hello There", 1, (200, 200, 200))
+text = font.render("SCORE<1>", 1, (200, 200, 200))
 textpos = text.get_rect()
-textpos.centerx = screen.get_rect().centerx
+#textpos.centerx = screen.get_rect().centerx
 
 
 # Main game loop
