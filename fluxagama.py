@@ -1,6 +1,9 @@
 import pygame, os
 from pygame.locals import *
-
+class Enemy:
+    def __init__(self, enemyType, position):
+        self.type = enemyType
+        self.position = position
 def load_image(filename):
     "loads an image, prepares it for play"
     filename = os.path.join("data", filename)
@@ -27,7 +30,9 @@ def generate_enemy_wave(enemies):
     for i in range(5):
         for j in range(11):
             position = [60 + j * 50, BORDER_UPPER + 80 + i * 40]
-            enemies.append(position)
+            enemyType = 2-i/2
+            enemy = Enemy(enemyType, position)
+            enemies.append(enemy)
 # Main program starts here
 pygame.mixer.pre_init(frequency=22050, size= -16, channels=2, buffer=512)
 pygame.init()
@@ -96,15 +101,15 @@ while not done:
     screen.blit(score1surface, score1textpos)
     dying_enemies = [] # empty list that gets filled when enemies get shot
     for i in range(len(enemies)):
-        screen.blit (enemy0_surface, (enemies[i][0], enemies[i][1]))
+        screen.blit (enemy0_surface, enemies[i].position)
         # collision detection shot <-> enemy
-        if enemies[i][1] + enemy0Y < shot_coorY:
+        if enemies[i].position[1] + enemy0Y < shot_coorY:
             pass
-        elif enemies[i][1] > shot_coorY + shotY:
+        elif enemies[i].position[1] > shot_coorY + shotY:
             pass
-        elif enemies[i][0] > shot_coorX + shotX:
+        elif enemies[i].position[0] > shot_coorX + shotX:
             pass
-        elif enemies[i][0] + enemy0X < shot_coorX:
+        elif enemies[i].position[0] + enemy0X < shot_coorX:
             pass
         else:
             # Collision!
