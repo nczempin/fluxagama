@@ -68,7 +68,6 @@ enemies = []
 generate_enemy_wave(enemies)
 
 shot_exists = False
-enemy0_exists = True
 done = False
 
 clock = pygame.time.Clock()
