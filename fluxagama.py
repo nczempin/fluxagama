@@ -45,6 +45,8 @@ BORDER_LEFT = 0
 BORDER_RIGHT = screenX
 BORDER_LOWER = screenY-100
 BORDER_UPPER = 100
+COLOUR_TEXT = (200, 200, 200) #light grey
+COLOUR_BACKGROUND = (0, 0, 0) #black
 
 
 shoot_sound = load_sound('psh.ogg')
@@ -75,9 +77,8 @@ clock = pygame.time.Clock()
 ticks = 0
 
 font = pygame.font.Font(None, 36)
-score1titletext = font.render("SCORE<1>", 1, (200, 200, 200))
+score1titletext = font.render("SCORE<1>", 1, COLOUR_TEXT)
 score1titletextpos = score1titletext.get_rect()
-
 score = 0
 # Main game loop
 while not done:
@@ -87,11 +88,11 @@ while not done:
         fps = clock.get_fps()
         print fps
     # draw black background
-    screen.fill((0, 0, 0))
+    screen.fill(COLOUR_BACKGROUND)
     #draw text
     screen.blit(score1titletext, score1titletextpos)
     scoretext = "%06d" % score
-    score1surface = font.render(scoretext, 1, (200, 200, 200))
+    score1surface = font.render(scoretext, 1, COLOUR_TEXT)
     score1textpos = score1surface.get_rect()
     score1textpos.centery = 36
     screen.blit(score1surface, score1textpos)
