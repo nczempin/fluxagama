@@ -26,10 +26,10 @@ def generate_enemy_wave(enemies):
     global BORDER_UPPER
     for i in range(5):
         for j in range(11):
-            position = [60+j*50, BORDER_UPPER+80+i*40]
+            position = [60 + j * 50, BORDER_UPPER + 80 + i * 40]
             enemies.append(position)
 # Main program starts here
-pygame.mixer.pre_init(frequency=22050, size=-16, channels=2, buffer=512)
+pygame.mixer.pre_init(frequency=22050, size= -16, channels=2, buffer=512)
 pygame.init()
 if pygame.mixer and not pygame.mixer.get_init():
     print 'Warning, no sound'
@@ -38,7 +38,7 @@ if pygame.mixer and not pygame.mixer.get_init():
 SCREEN_SIZE = (672, 768)
 BORDER_LEFT = 0
 BORDER_RIGHT = SCREEN_SIZE[0]
-BORDER_LOWER = SCREEN_SIZE[1]-100
+BORDER_LOWER = SCREEN_SIZE[1] - 100
 BORDER_UPPER = 100
 COLOUR_TEXT = (200, 200, 200) #light grey
 COLOUR_BACKGROUND = (0, 0, 0) #black
@@ -72,7 +72,7 @@ done = False
 
 clock = pygame.time.Clock()
 ticks = 0
-
+# prepare text rendering
 font = pygame.font.Font(None, 36)
 score1titletext = font.render("SCORE<1>", 1, COLOUR_TEXT)
 score1titletextpos = score1titletext.get_rect()
@@ -81,7 +81,7 @@ score = 0
 while not done:
     clock.tick()
     ticks += 1
-    if (ticks % 1000)==0:
+    if (ticks % 1000) == 0:
         fps = clock.get_fps()
         print fps
     # draw black background
@@ -114,30 +114,23 @@ while not done:
             # TODO: enemy explosion
     delta = 0
     for i in range(len(dying_enemies)):
-        del enemies[dying_enemies[i+delta]]
+        del enemies[dying_enemies[i + delta]]
         delta += 1 # each time we remove one, the index of all the others must be reduced. This assumes that the list of dying enemies is sorted
-    if len(enemies)==0:
-        print"whole wave destroyed!"
+    if len(enemies) == 0:
         generate_enemy_wave(enemies)
-    
-        
     if shot_exists:
         # draw and move shot
         screen.blit (shot_surface, (shot_coorX, shot_coorY))
         shot_coorY -= 1
         if shot_coorY <= BORDER_UPPER:
             shot_exists = False
-
- 
     # draw player ship
     screen.blit (ship_surface, (ship_coorX, ship_coorY))
-
-    # swap baCK AND FRONT BUFFERS
+    # swap back and front buffers
     pygame.display.flip()
     # read keyboard and move player ship
     events = pygame.event.get()
     keystate = pygame.key.get_pressed()
-
     if keystate[K_a] == 1:
         if ship_coorX > BORDER_LEFT:
             ship_coorX -= 1
@@ -148,14 +141,8 @@ while not done:
         if not shot_exists:
             shoot_sound.play()
             shot_exists = True
-            shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY
-
+            shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY #generate shot near top middle of gun
     for event in events: 
-        if event.type == QUIT:# or
-        #if event.key == K_ESCAPE: 
-            done= True
-#        elif event.type == KEYDOWN:
-#            print event.scancode
-#            if event.scancode == 57 and not shot_exists:
-
+        if event.type == QUIT or event.key == K_ESCAPE: 
+            done = True
 pygame.quit()
