@@ -42,6 +42,7 @@ BORDER_LOWER = SCREEN_SIZE[1] - 100
 BORDER_UPPER = 100
 COLOUR_TEXT = (200, 200, 200) #light grey
 COLOUR_BACKGROUND = (0, 0, 0) #black
+SHOT_SPEED =1.5
 
 window = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1])) 
 pygame.display.set_caption('Fluxagama') 
@@ -61,8 +62,8 @@ enemy0X, enemy0Y = enemy0_surface.get_size()
 ship_coorX = (SCREEN_SIZE[0] - shipX) / 2
 ship_coorY = BORDER_LOWER - shipY
 
-shot_coorX = 0
-shot_coorY = 0
+shot_coorX = 0.0
+shot_coorY = 0.0
 
 enemies = []
 generate_enemy_wave(enemies)
@@ -121,7 +122,7 @@ while not done:
     if shot_exists:
         # draw and move shot
         screen.blit (shot_surface, (shot_coorX, shot_coorY))
-        shot_coorY -= 1
+        shot_coorY -= SHOT_SPEED
         if shot_coorY <= BORDER_UPPER:
             shot_exists = False
     # draw player ship
