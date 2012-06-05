@@ -78,7 +78,7 @@ font = pygame.font.Font(None, 36)
 score1titletext = font.render("SCORE<1>", 1, (200, 200, 200))
 score1titletextpos = score1titletext.get_rect()
 
-
+score = 0
 # Main game loop
 while not done:
     clock.tick()
@@ -90,7 +90,7 @@ while not done:
     screen.fill((0, 0, 0))
     #draw text
     screen.blit(score1titletext, score1titletextpos)
-    scoretext = "%06d"%10
+    scoretext = "%06d" % score
     score1surface = font.render(scoretext, 1, (200, 200, 200))
     score1textpos = score1surface.get_rect()
     score1textpos.centery = 36
@@ -109,6 +109,7 @@ while not done:
             pass
         else:
             # Collision!
+            score += 10
             dying_enemies.append(i)
             shot_exists = False
             enemy_explosion_sound.play()
