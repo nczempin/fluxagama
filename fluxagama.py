@@ -30,7 +30,7 @@ def generate_enemy_wave(enemies):
     for i in range(5):
         for j in range(11):
             position = [60 + j * 50, BORDER_UPPER + 80 + i * 40]
-            enemyType = 2-i/2
+            enemyType = 2-(i+1)/2
             enemy = Enemy(enemyType, position)
             enemies.append(enemy)
 # Main program starts here
@@ -101,19 +101,20 @@ while not done:
     screen.blit(score1surface, score1textpos)
     dying_enemies = [] # empty list that gets filled when enemies get shot
     for i in range(len(enemies)):
-        screen.blit (enemy0_surface, enemies[i].position)
+        pos = enemies[i].position
+        screen.blit (enemy0_surface, pos)
         # collision detection shot <-> enemy
-        if enemies[i].position[1] + enemy0Y < shot_coorY:
+        if pos[1] + enemy0Y < shot_coorY:
             pass
-        elif enemies[i].position[1] > shot_coorY + shotY:
+        elif pos[1] > shot_coorY + shotY:
             pass
-        elif enemies[i].position[0] > shot_coorX + shotX:
+        elif pos[0] > shot_coorX + shotX:
             pass
-        elif enemies[i].position[0] + enemy0X < shot_coorX:
+        elif pos[0] + enemy0X < shot_coorX:
             pass
         else:
             # Collision!
-            score += 10
+            score += 10 * (enemies[i].type+1)
             dying_enemies.append(i)
             shot_exists = False
             enemy_explosion_sound.play()
