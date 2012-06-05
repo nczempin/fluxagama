@@ -143,6 +143,6 @@ while not done:
             shot_exists = True
             shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY #generate shot near top middle of gun
     for event in events: 
-        if event.type == QUIT or event.key == K_ESCAPE: 
+        if event.type == QUIT: 
             done = True
 pygame.quit()
