@@ -77,9 +77,6 @@ ticks = 0
 font = pygame.font.Font(None, 36)
 score1titletext = font.render("SCORE<1>", 1, (200, 200, 200))
 score1titletextpos = score1titletext.get_rect()
-score1text = font.render("00000", 1, (200, 200, 200))
-score1textpos = score1text.get_rect()
-score1textpos.centery = 36
 
 
 # Main game loop
@@ -93,7 +90,11 @@ while not done:
     screen.fill((0, 0, 0))
     #draw text
     screen.blit(score1titletext, score1titletextpos)
-    screen.blit(score1text, score1textpos)
+    scoretext = "%06d"%10
+    score1surface = font.render(scoretext, 1, (200, 200, 200))
+    score1textpos = score1surface.get_rect()
+    score1textpos.centery = 36
+    screen.blit(score1surface, score1textpos)
     dying_enemies = [] # empty list that gets filled when enemies get shot
     for i in range(len(enemies)):
         screen.blit (enemy0_surface, (enemies[i][0], enemies[i][1]))
