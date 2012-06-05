@@ -58,11 +58,11 @@ enemy_explosion_sound = load_sound('uddh.ogg')
 
 ship_surface = load_image("gun.png")
 shot_surface = load_image("shot.png")
-enemy0_surface = load_image("UFO.png")
+enemy_surface =( load_image("UFO.png"),load_image("enemy01.png"), load_image("enemy02.png"))
 
 shipX, shipY = ship_surface.get_size()
 shotX, shotY = shot_surface.get_size()
-enemy0X, enemy0Y = enemy0_surface.get_size()
+enemy0X, enemy0Y = enemy_surface[0].get_size() #TODO we assume for now that all enemies have the same size
 
 ship_coorX = (SCREEN_SIZE[0] - shipX) / 2
 ship_coorY = BORDER_LOWER - shipY
@@ -102,7 +102,8 @@ while not done:
     dying_enemies = [] # empty list that gets filled when enemies get shot
     for i in range(len(enemies)):
         pos = enemies[i].position
-        screen.blit (enemy0_surface, pos)
+        
+        screen.blit (enemy_surface[enemies[i].type], pos)
         # collision detection shot <-> enemy
         if pos[1] + enemy0Y < shot_coorY:
             pass
