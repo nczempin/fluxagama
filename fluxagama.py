@@ -99,7 +99,7 @@ while not done:
     score1textpos = score1surface.get_rect()
     score1textpos.centery = 36
     screen.blit(score1surface, score1textpos)
-    dying_enemies = [] # empty list that gets filled when enemies get shot
+    dying_enemies = [] # empty list that gets filled as enemies get shot
     for i in range(len(enemies)):
         pos = enemies[i].position
         
