@@ -34,20 +34,18 @@ pygame.init()
 if pygame.mixer and not pygame.mixer.get_init():
     print 'Warning, no sound'
     pygame.mixer = None
-screenX = 672
-screenY = 768
-window = pygame.display.set_mode((screenX, screenY)) 
-pygame.display.set_caption('Fluxagama') 
-screen = pygame.display.get_surface()
-
-
+    
+SCREEN_SIZE = (672, 768)
 BORDER_LEFT = 0
-BORDER_RIGHT = screenX
-BORDER_LOWER = screenY-100
+BORDER_RIGHT = SCREEN_SIZE[0]
+BORDER_LOWER = SCREEN_SIZE[1]-100
 BORDER_UPPER = 100
 COLOUR_TEXT = (200, 200, 200) #light grey
 COLOUR_BACKGROUND = (0, 0, 0) #black
 
+window = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1])) 
+pygame.display.set_caption('Fluxagama') 
+screen = pygame.display.get_surface()
 
 shoot_sound = load_sound('psh.ogg')
 enemy_explosion_sound = load_sound('uddh.ogg')
@@ -60,7 +58,7 @@ shipX, shipY = ship_surface.get_size()
 shotX, shotY = shot_surface.get_size()
 enemy0X, enemy0Y = enemy0_surface.get_size()
 
-ship_coorX = (screenX - shipX) / 2
+ship_coorX = (SCREEN_SIZE[0] - shipX) / 2
 ship_coorY = BORDER_LOWER - shipY
 
 shot_coorX = 0
