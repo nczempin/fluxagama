@@ -29,7 +29,7 @@ def generate_enemy_wave(enemies):
     global BORDER_UPPER
     for i in range(5):
         for j in range(11):
-            position = [60 + j * 50, BORDER_UPPER + 80 + i * 50]
+            position = [60 + j * 50, BORDER_UPPER + 110 + i * 50]
             enemyType = 2-(i+1)/2
             enemy = Enemy(enemyType, position)
             enemies.append(enemy)
