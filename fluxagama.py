@@ -47,7 +47,7 @@ BORDER_LOWER = SCREEN_SIZE[1] - 100
 BORDER_UPPER = 100
 COLOUR_TEXT = (255, 255, 255) # white
 COLOUR_BACKGROUND = (0, 0, 0) #black
-SHOT_SPEED =1.5
+SHOT_SPEED = 2.5
 
 window = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1])) 
 pygame.display.set_caption('Fluxagama') 
