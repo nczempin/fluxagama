@@ -99,6 +99,9 @@ while not done:
     score1textpos = score1surface.get_rect()
     score1textpos.centery = 36
     screen.blit(score1surface, score1textpos)
+    
+    pygame.draw.rect(screen, (0,200,0), (0,BORDER_LOWER+35,SCREEN_SIZE[0],3))
+    
     dying_enemies = [] # empty list that gets filled as enemies get shot
     for i in range(len(enemies)):
         pos = enemies[i].position
