@@ -34,6 +34,25 @@ def generate_enemy_wave(enemies):
             enemyType = 2-(i+1)/2
             enemy = Enemy(enemyType, position)
             enemies.append(enemy)
+            
+def draw_background(surface):
+    global COLOUR_BACKGROUND
+    surface.fill(COLOUR_BACKGROUND)
+    
+def draw_text(surface, score):
+    global BORDER_LOWER
+    global SCREEN_SIZE
+    global score1titletext
+    global score1titletextpos
+    surface.blit(score1titletext, score1titletextpos)
+    scoretext = "%04d" % score
+    score1surface = font.render(scoretext, 1, COLOUR_TEXT)
+    score1textpos = score1surface.get_rect()
+    score1textpos.x = 72
+    score1textpos.centery = 90
+    surface.blit(score1surface, score1textpos)
+    pygame.draw.rect(surface, (0,200,0), (0,BORDER_LOWER+35,SCREEN_SIZE[0],3))
+
 # Main program starts here
 pygame.mixer.pre_init(frequency=22050, size= -16, channels=2, buffer=512)
 pygame.init()
@@ -95,17 +114,9 @@ while not done:
         fps = clock.get_fps()
         print fps
     # draw black background
-    screen.fill(COLOUR_BACKGROUND)
+    draw_background(screen)
     #draw text
-    screen.blit(score1titletext, score1titletextpos)
-    scoretext = "%04d" % score
-    score1surface = font.render(scoretext, 1, COLOUR_TEXT)
-    score1textpos = score1surface.get_rect()
-    score1textpos.x = 72
-    score1textpos.centery = 90
-    screen.blit(score1surface, score1textpos)
-    
-    pygame.draw.rect(screen, (0,200,0), (0,BORDER_LOWER+35,SCREEN_SIZE[0],3))
+    draw_text(screen, score)
     
     dying_enemies = [] # empty list that gets filled as enemies get shot
     for i in range(len(enemies)):
