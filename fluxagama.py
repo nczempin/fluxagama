@@ -147,10 +147,10 @@ while not done:
     events = pygame.event.get()
     keystate = pygame.key.get_pressed()
     if keystate[K_a] == 1:
-        if ship_coorX > BORDER_LEFT:
+        if ship_coorX > BORDER_LEFT+60:
             ship_coorX -= SHIP_SPEED
     if keystate[K_d] == 1:
-        if ship_coorX + shipX < BORDER_RIGHT:
+        if ship_coorX + shipX < BORDER_RIGHT-60:
             ship_coorX += SHIP_SPEED
     if keystate[K_SPACE] == 1:
         if not shot_exists:
