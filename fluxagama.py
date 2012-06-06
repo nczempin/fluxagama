@@ -47,7 +47,8 @@ BORDER_LOWER = SCREEN_SIZE[1] - 100
 BORDER_UPPER = 100
 COLOUR_TEXT = (255, 255, 255) # white
 COLOUR_BACKGROUND = (0, 0, 0) #black
-SHOT_SPEED = 2.5
+SHOT_SPEED = 10
+SHIP_SPEED = 4
 
 window = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1])) 
 pygame.display.set_caption('Fluxagama') 
@@ -87,7 +88,7 @@ score1titletextpos.centery = 36
 score = 0
 # Main game loop
 while not done:
-    clock.tick()
+    clock.tick(60)
     ticks += 1
     if (ticks % 1000) == 0:
         fps = clock.get_fps()
@@ -147,10 +148,10 @@ while not done:
     keystate = pygame.key.get_pressed()
     if keystate[K_a] == 1:
         if ship_coorX > BORDER_LEFT:
-            ship_coorX -= 1
+            ship_coorX -= SHIP_SPEED
     if keystate[K_d] == 1:
         if ship_coorX + shipX < BORDER_RIGHT:
-            ship_coorX += 1
+            ship_coorX += SHIP_SPEED
     if keystate[K_SPACE] == 1:
         if not shot_exists:
             shoot_sound.play()
