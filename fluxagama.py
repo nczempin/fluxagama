@@ -40,7 +40,7 @@ if pygame.mixer and not pygame.mixer.get_init():
     print 'Warning, no sound'
     pygame.mixer = None
     
-SCREEN_SIZE = (672, 768)
+SCREEN_SIZE = (672, 780)
 BORDER_LEFT = 0
 BORDER_RIGHT = SCREEN_SIZE[0]
 BORDER_LOWER = SCREEN_SIZE[1] - 100
