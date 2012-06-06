@@ -45,7 +45,7 @@ BORDER_LEFT = 0
 BORDER_RIGHT = SCREEN_SIZE[0]
 BORDER_LOWER = SCREEN_SIZE[1] - 100
 BORDER_UPPER = 100
-COLOUR_TEXT = (200, 200, 200) #light grey
+COLOUR_TEXT = (255, 255, 255) # white
 COLOUR_BACKGROUND = (0, 0, 0) #black
 SHOT_SPEED =1.5
 
@@ -79,9 +79,11 @@ done = False
 clock = pygame.time.Clock()
 ticks = 0
 # prepare text rendering
-font = pygame.font.Font(None, 36)
+font = pygame.font.SysFont("Courier", 36)
 score1titletext = font.render("SCORE<1>", 1, COLOUR_TEXT)
 score1titletextpos = score1titletext.get_rect()
+score1titletextpos.x = 18
+score1titletextpos.centery = 36
 score = 0
 # Main game loop
 while not done:
@@ -94,10 +96,11 @@ while not done:
     screen.fill(COLOUR_BACKGROUND)
     #draw text
     screen.blit(score1titletext, score1titletextpos)
-    scoretext = "%06d" % score
+    scoretext = "%04d" % score
     score1surface = font.render(scoretext, 1, COLOUR_TEXT)
     score1textpos = score1surface.get_rect()
-    score1textpos.centery = 36
+    score1textpos.x = 72
+    score1textpos.centery = 90
     screen.blit(score1surface, score1textpos)
     
     pygame.draw.rect(screen, (0,200,0), (0,BORDER_LOWER+35,SCREEN_SIZE[0],3))
