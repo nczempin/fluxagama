@@ -6,6 +6,7 @@ class Enemy:
         self.position = position
 def load_image(filename):
     "loads an image, prepares it for play"
+    print "Loading image "+filename
     filename = os.path.join("data", filename)
     try:
         surface = pygame.image.load(filename)
@@ -17,7 +18,7 @@ class dummysound:
     
 def load_sound(filename):
     if not pygame.mixer: return dummysound()
-    print "Lade Sound"
+    print "Loading sound "+filename
     filename = os.path.join("data", filename)
     try:
         sound = pygame.mixer.Sound(filename)
