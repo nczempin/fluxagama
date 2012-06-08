@@ -4,6 +4,22 @@ class Enemy:
     def __init__(self, enemyType, position):
         self.type = enemyType
         self.position = position
+class PlayerShip(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = load_image('gun.png')
+#        screen = pygame.display.get_surface()
+#        self.area = screen.get_rect()
+        # self.vector = vector
+
+#    def update(self):
+#        newpos = self.calcnewpos(self.rect,self.vector)
+#        self.rect = newpos
+#
+#    def calcnewpos(self,rect,vector):
+#        (angle,z) = vector
+#        #(dx,dy) = (z*math.cos(angle),z*math.sin(angle))
+#        #return rect.move(dx,dy)
 def load_image(filename):
     "loads an image, prepares it for play"
     print "Loading image "+filename
@@ -78,10 +94,11 @@ shoot_sound = load_sound('psh.ogg')
 enemy_explosion_sound = load_sound('uddh.ogg')
 
 ship_surface = load_image("gun.png")
+ship_sprite = PlayerShip()
 shot_surface = load_image("shot.png")
-enemy_surface =( load_image("UFO.png"),load_image("enemy01.png"), load_image("enemy02.png"))
+enemy_surface = (load_image("UFO.png"),load_image("enemy01.png"), load_image("enemy02.png"))
 
-shipX, shipY = ship_surface.get_size()
+shipX, shipY = ship_sprite.image.get_size()
 shotX, shotY = shot_surface.get_size()
 enemy0X, enemy0Y = enemy_surface[0].get_size() #TODO we assume for now that all enemies have the same size
 
@@ -152,7 +169,7 @@ while not done:
         if shot_coorY <= BORDER_UPPER:
             shot_exists = False
     # draw player ship
-    screen.blit (ship_surface, (ship_coorX, ship_coorY))
+    screen.blit (ship_sprite.image, (ship_coorX, ship_coorY))
     # swap back and front buffers
     pygame.display.flip()
     # read keyboard and move player ship
