@@ -4,6 +4,8 @@ class Enemy:
     def __init__(self, enemyType, position):
         self.type = enemyType
         self.position = position
+    def __repr__(self):
+           return str(self.type)+str(self.position)
 class PlayerShip(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -36,8 +38,8 @@ def load_sound(filename):
     return dummysound()
 def generate_enemy_wave(enemies):
     global BORDER_UPPER
-    for i in range(5):
-        for j in range(11):
+    for i in range(4):
+        for j in range(2):
             position = [60 + j * 50, BORDER_UPPER + 110 + i * 50]
             enemyType = 2-(i+1)/2
             enemy = Enemy(enemyType, position)
@@ -119,7 +121,7 @@ score = 0
 while not done:
     clock.tick(60)
     ticks += 1
-    if (ticks % 1000) == 0:
+    if (ticks % 60) == 0:
         fps = clock.get_fps()
         print fps
     # draw black background
@@ -130,24 +132,24 @@ while not done:
     dying_enemies = [] # empty list that gets filled as enemies get shot
     for i in range(len(enemies)):
         pos = enemies[i].position
-        
         screen.blit (enemy_surface[enemies[i].type], pos)
         # collision detection shot <-> enemy
-        if pos[1] + enemy0Y < shot_coorY:
-            pass
-        elif pos[1] > shot_coorY + shotY:
-            pass
-        elif pos[0] > shot_coorX + shotX:
-            pass
-        elif pos[0] + enemy0X < shot_coorX:
-            pass
-        else:
-            # Collision!
-            score += 10 * (enemies[i].type+1)
-            dying_enemies.append(i)
-            shot_exists = False
-            enemy_explosion_sound.play()
-            # TODO: enemy explosion
+        if shot_exists:
+            if pos[1] + enemy0Y < shot_coorY:
+                pass
+            elif pos[1] > shot_coorY + shotY:
+                pass
+            elif pos[0] > shot_coorX + shotX:
+                pass
+            elif pos[0] + enemy0X < shot_coorX:
+                pass
+            else:
+                # Collision!
+                score += 10 * (enemies[i].type+1)
+                dying_enemies.append(i)
+                shot_exists = False
+                enemy_explosion_sound.play()
+                # TODO: enemy explosion
     delta = 0
     for i in range(len(dying_enemies)):
         del enemies[dying_enemies[i + delta]]
