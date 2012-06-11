@@ -83,6 +83,9 @@ def draw_text(surface, score):
     pygame.draw.rect(surface, (0,200,0), (0,BORDER_LOWER+35,SCREEN_SIZE[0],3))
 def main():
     # Main program starts here
+    pygame.display.set_caption('Fluxagama') 
+    
+    
     pygame.mixer.pre_init(frequency=22050, size= -16, channels=2, buffer=512)
     pygame.init()
     if pygame.mixer and not pygame.mixer.get_init():
@@ -90,9 +93,11 @@ def main():
         pygame.mixer = None
     window = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1])) 
     game_loop()
-    
+    pygame.quit()    
     
 def game_loop():
+    enemies = []
+    generate_enemy_wave(enemies)
     screen = pygame.display.get_surface()
     
     shoot_sound = load_sound('psh.ogg')
@@ -182,12 +187,7 @@ def game_loop():
         for event in events: 
             if event.type == QUIT: 
                 done = True
-pygame.display.set_caption('Fluxagama') 
-    
-    
-enemies = []
-generate_enemy_wave(enemies)
 
 
 main()
-pygame.quit()
+
