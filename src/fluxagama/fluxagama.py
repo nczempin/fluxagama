@@ -1,13 +1,12 @@
 import pygame
 from pygame.locals import *
-import graphics,sound
+import graphics,sound,text
 import Enemy,PlayerShip,Shot
 SCREEN_SIZE = (672, 780)
 BORDER_LEFT = 0
 BORDER_RIGHT = SCREEN_SIZE[0]
 BORDER_LOWER = SCREEN_SIZE[1] - 100
 BORDER_UPPER = 100
-COLOUR_TEXT = (255, 255, 255) # white
 SHOT_SPEED = 10
 SHIP_SPEED = 4
 TICKS_PER_SECOND = 60
@@ -24,25 +23,6 @@ def generate_enemy_wave(enemies):
             enemies.append(enemy)
             
     
-def draw_text(surface, score):
-    global BORDER_LOWER
-    global SCREEN_SIZE
-    global score1titletext
-    global score1titletextpos
-    font = pygame.font.SysFont("Courier", 36)
-    # prepare text rendering
-    score1titletext = font.render("SCORE<1>", 1, COLOUR_TEXT)
-    score1titletextpos = score1titletext.get_rect()
-    score1titletextpos.x = 18
-    score1titletextpos.centery = 36
-    surface.blit(score1titletext, score1titletextpos)
-    scoretext = "%04d" % score
-    score1surface = font.render(scoretext, 1, COLOUR_TEXT)
-    score1textpos = score1surface.get_rect()
-    score1textpos.x = 72
-    score1textpos.centery = 90
-    surface.blit(score1surface, score1textpos)
-    pygame.draw.rect(surface, (0,200,0), (0,BORDER_LOWER+35,SCREEN_SIZE[0],3))
 def main():
     # Main program starts here
     
@@ -91,7 +71,7 @@ def game_loop():
             fps = clock.get_fps()
             print fps
         graphics.draw_background(screen)
-        draw_text(screen, score)
+        text.draw_text(screen, score)
         
         dying_enemies = [] # empty list that gets filled as enemies get shot
         for i in range(len(enemies)):
