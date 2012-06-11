@@ -1,15 +1,8 @@
 import pygame
 from pygame.locals import *
+from constants import *
 import graphics,sound,text
 import Enemy,PlayerShip,Shot
-SCREEN_SIZE = (672, 780)
-BORDER_LEFT = 0
-BORDER_RIGHT = SCREEN_SIZE[0]
-BORDER_LOWER = SCREEN_SIZE[1] - 100
-BORDER_UPPER = 100
-SHOT_SPEED = 10
-SHIP_SPEED = 4
-TICKS_PER_SECOND = 60
 
 def generate_enemy_wave(enemies):
     global BORDER_UPPER
@@ -25,6 +18,7 @@ def generate_enemy_wave(enemies):
     
 
 def init_game():
+    global SCREEN_SIZE
     pygame.mixer.pre_init(frequency=22050, size=-16, channels=2, buffer=512)
     pygame.init()
     if pygame.mixer and not pygame.mixer.get_init():
@@ -34,6 +28,9 @@ def init_game():
     window = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1]))
     
 def game_loop():
+    global BORDER_LOWER, BORDER_LEFT, BORDER_RIGHT
+    global TICKS_PER_SECOND
+    global SHOT_SPEED,SHIP_SPEED
     enemies = []
     generate_enemy_wave(enemies)
     screen = pygame.display.get_surface()

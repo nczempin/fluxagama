@@ -1,4 +1,5 @@
 import pygame
+from constants import *
 COLOUR_TEXT = (255, 255, 255) # white
 def draw_text(surface, score):
     global BORDER_LOWER
