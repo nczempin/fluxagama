@@ -1,6 +1,6 @@
 import pygame, os
 from pygame.locals import *
-
+import Enemy
 SCREEN_SIZE = (672, 780)
 BORDER_LEFT = 0
 BORDER_RIGHT = SCREEN_SIZE[0]
@@ -11,12 +11,6 @@ SHOT_SPEED = 10
 SHIP_SPEED = 4
 TICKS_PER_SECOND = 60
 
-class Enemy:
-    def __init__(self, enemyType, position):
-        self.type = enemyType
-        self.position = position
-    def __repr__(self):
-        return str(self.type)+str(self.position)
 class PlayerShip(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -28,7 +22,7 @@ class Shot(pygame.sprite.Sprite):
 def load_image(filename):
     "loads an image, prepares it for play"
     print "Loading image "+filename
-    filename = os.path.join("../data", filename)
+    filename = os.path.join("../../data", filename)
     try:
         surface = pygame.image.load(filename)
     except pygame.error:
@@ -55,7 +49,7 @@ def generate_enemy_wave(enemies):
         for j in range(ENEMY_COLUMNS):
             position = [60 + j * 50, BORDER_UPPER + 110 + i * 50]
             enemyType = 2-(i+1)/2
-            enemy = Enemy(enemyType, position)
+            enemy = Enemy.Enemy(enemyType, position)
             enemies.append(enemy)
             
 def draw_background(surface):
