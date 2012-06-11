@@ -28,7 +28,7 @@ class Shot(pygame.sprite.Sprite):
 def load_image(filename):
     "loads an image, prepares it for play"
     print "Loading image "+filename
-    filename = os.path.join("data", filename)
+    filename = os.path.join("../data", filename)
     try:
         surface = pygame.image.load(filename)
     except pygame.error:
@@ -40,7 +40,7 @@ class dummysound:
 def load_sound(filename):
     if not pygame.mixer: return dummysound()
     print "Loading sound "+filename
-    filename = os.path.join("data", filename)
+    filename = os.path.join("../data", filename)
     try:
         sound = pygame.mixer.Sound(filename)
         return sound
