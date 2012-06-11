@@ -96,8 +96,6 @@ shipX, shipY = ship_sprite.image.get_size()
 shotX, shotY = shot_sprite.image.get_size()
 enemy0X, enemy0Y = enemy_surface[0].get_size() #TODO we assume for now that all enemies have the same size
 
-ship_coorX = (SCREEN_SIZE[0] - shipX) / 2
-ship_coorY = BORDER_LOWER - shipY
 
 shot_coorX = 0.0
 shot_coorY = 0.0
@@ -105,82 +103,86 @@ shot_coorY = 0.0
 enemies = []
 generate_enemy_wave(enemies)
 
-shot_exists = False
-done = False
 
 clock = pygame.time.Clock()
-ticks = 0
 # prepare text rendering
 font = pygame.font.SysFont("Courier", 36)
 score1titletext = font.render("SCORE<1>", 1, COLOUR_TEXT)
 score1titletextpos = score1titletext.get_rect()
 score1titletextpos.x = 18
 score1titletextpos.centery = 36
-score = 0
-# Main game loop
-while not done:
-    clock.tick(60)
-    ticks += 1
-    if (ticks % 60) == 0:
-        fps = clock.get_fps()
-        print fps
-    # draw black background
-    draw_background(screen)
-    #draw text
-    draw_text(screen, score)
-    
-    dying_enemies = [] # empty list that gets filled as enemies get shot
-    for i in range(len(enemies)):
-        pos = enemies[i].position
-        screen.blit (enemy_surface[enemies[i].type], pos)
-        # collision detection shot <-> enemy
+def game_loop():
+    ship_coorX = (SCREEN_SIZE[0] - shipX) / 2
+    ship_coorY = BORDER_LOWER - shipY
+    shot_exists = False
+    score = 0
+    ticks = 0
+    done = False
+   # Main game loop
+    while not done:
+        clock.tick(60)
+        ticks += 1
+        if (ticks % 60) == 0:
+            fps = clock.get_fps()
+            print fps
+        # draw black background
+        draw_background(screen)
+        #draw text
+        draw_text(screen, score)
+        
+        dying_enemies = [] # empty list that gets filled as enemies get shot
+        for i in range(len(enemies)):
+            pos = enemies[i].position
+            screen.blit (enemy_surface[enemies[i].type], pos)
+            # collision detection shot <-> enemy
+            if shot_exists:
+                if pos[1] + enemy0Y < shot_coorY:
+                    pass
+                elif pos[1] > shot_coorY + shotY:
+                    pass
+                elif pos[0] > shot_coorX + shotX:
+                    pass
+                elif pos[0] + enemy0X < shot_coorX:
+                    pass
+                else:
+                    # Collision!
+                    score += 10 * (enemies[i].type+1)
+                    dying_enemies.append(i)
+                    shot_exists = False
+                    enemy_explosion_sound.play()
+                    # TODO: enemy explosion
+        delta = 0
+        for i in range(len(dying_enemies)):
+            del enemies[dying_enemies[i + delta]]
+            delta += 1 # each time we remove one, the index of all the others must be reduced. This assumes that the list of dying enemies is sorted
+        if len(enemies) == 0:
+            generate_enemy_wave(enemies)
         if shot_exists:
-            if pos[1] + enemy0Y < shot_coorY:
-                pass
-            elif pos[1] > shot_coorY + shotY:
-                pass
-            elif pos[0] > shot_coorX + shotX:
-                pass
-            elif pos[0] + enemy0X < shot_coorX:
-                pass
-            else:
-                # Collision!
-                score += 10 * (enemies[i].type+1)
-                dying_enemies.append(i)
+            # draw and move shot
+            screen.blit (shot_sprite.image, (shot_coorX, shot_coorY))
+            shot_coorY -= SHOT_SPEED
+            if shot_coorY <= BORDER_UPPER:
                 shot_exists = False
-                enemy_explosion_sound.play()
-                # TODO: enemy explosion
-    delta = 0
-    for i in range(len(dying_enemies)):
-        del enemies[dying_enemies[i + delta]]
-        delta += 1 # each time we remove one, the index of all the others must be reduced. This assumes that the list of dying enemies is sorted
-    if len(enemies) == 0:
-        generate_enemy_wave(enemies)
-    if shot_exists:
-        # draw and move shot
-        screen.blit (shot_sprite.image, (shot_coorX, shot_coorY))
-        shot_coorY -= SHOT_SPEED
-        if shot_coorY <= BORDER_UPPER:
-            shot_exists = False
-    # draw player ship
-    screen.blit (ship_sprite.image, (ship_coorX, ship_coorY))
-    # swap back and front buffers
-    pygame.display.flip()
-    # read keyboard and move player ship
-    events = pygame.event.get()
-    keystate = pygame.key.get_pressed()
-    if keystate[K_a] == 1:
-        if ship_coorX > BORDER_LEFT+60:
-            ship_coorX -= SHIP_SPEED
-    if keystate[K_d] == 1:
-        if ship_coorX + shipX < BORDER_RIGHT-60:
-            ship_coorX += SHIP_SPEED
-    if keystate[K_SPACE] == 1:
-        if not shot_exists:
-            shoot_sound.play()
-            shot_exists = True
-            shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY #generate shot near top middle of gun
-    for event in events: 
-        if event.type == QUIT: 
-            done = True
+        # draw player ship
+        screen.blit (ship_sprite.image, (ship_coorX, ship_coorY))
+        # swap back and front buffers
+        pygame.display.flip()
+        # read keyboard and move player ship
+        events = pygame.event.get()
+        keystate = pygame.key.get_pressed()
+        if keystate[K_a] == 1:
+            if ship_coorX > BORDER_LEFT+60:
+                ship_coorX -= SHIP_SPEED
+        if keystate[K_d] == 1:
+            if ship_coorX + shipX < BORDER_RIGHT-60:
+                ship_coorX += SHIP_SPEED
+        if keystate[K_SPACE] == 1:
+            if not shot_exists:
+                shoot_sound.play()
+                shot_exists = True
+                shot_coorX, shot_coorY = ship_coorX + (shipX - shotX) / 2, ship_coorY - shotY #generate shot near top middle of gun
+        for event in events: 
+            if event.type == QUIT: 
+                done = True
+game_loop()
 pygame.quit()
