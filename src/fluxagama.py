@@ -151,7 +151,7 @@ def game_loop():
                     dying_enemies.append(i)
                     shot_exists = False
                     enemy_explosion_sound.play()
-                    # TODO: enemy explosion
+                    # TODO: enemy explosion graphics
         delta = 0
         for i in range(len(dying_enemies)):
             del enemies[dying_enemies[i + delta]]
