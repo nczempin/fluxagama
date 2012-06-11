@@ -26,6 +26,7 @@ def init_game():
         pygame.mixer = None
     pygame.display.set_caption('Fluxagama')
     window = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1]))
+    text.init_text()
     
 def game_loop():
     global BORDER_LOWER, BORDER_LEFT, BORDER_RIGHT
