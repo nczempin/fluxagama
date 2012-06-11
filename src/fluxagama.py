@@ -9,7 +9,7 @@ BORDER_UPPER = 100
 COLOUR_TEXT = (255, 255, 255) # white
 SHOT_SPEED = 10
 SHIP_SPEED = 4
-
+TICKS_PER_SECOND = 60
 
 class Enemy:
     def __init__(self, enemyType, position):
@@ -123,9 +123,9 @@ def game_loop():
     done = False
     # Main game loop
     while not done:
-        clock.tick(60)
+        clock.tick(TICKS_PER_SECOND)
         ticks += 1
-        if (ticks % 60) == 0:
+        if (ticks % TICKS_PER_SECOND) == 0:
             fps = clock.get_fps()
             print fps
         draw_background(screen)
