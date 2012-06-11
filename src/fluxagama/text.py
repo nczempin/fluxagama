@@ -4,8 +4,6 @@ COLOUR_TEXT = (255, 255, 255) # white
 def draw_text(surface, score):
     global BORDER_LOWER
     global SCREEN_SIZE
-    global score1titletext
-    global score1titletextpos
     font = pygame.font.SysFont("Courier", 36)
     # prepare text rendering
     score1titletext = font.render("SCORE<1>", 1, COLOUR_TEXT)
