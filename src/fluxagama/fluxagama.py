@@ -1,6 +1,7 @@
-import pygame, os
+import pygame
 from pygame.locals import *
-import graphics,Enemy,PlayerShip,Shot
+import graphics,sound
+import Enemy,PlayerShip,Shot
 SCREEN_SIZE = (672, 780)
 BORDER_LEFT = 0
 BORDER_RIGHT = SCREEN_SIZE[0]
@@ -11,19 +12,6 @@ SHOT_SPEED = 10
 SHIP_SPEED = 4
 TICKS_PER_SECOND = 60
 
-class dummysound:
-    def play(self): pass
-    
-def load_sound(filename):
-    if not pygame.mixer: return dummysound()
-    print "Loading sound "+filename
-    filename = os.path.join("../../data", filename)
-    try:
-        sound = pygame.mixer.Sound(filename)
-        return sound
-    except pygame.error:
-        print 'Warning, unable to load,', filename
-    return dummysound()
 def generate_enemy_wave(enemies):
     global BORDER_UPPER
     ENEMY_ROWS = 5
@@ -77,8 +65,8 @@ def game_loop():
     generate_enemy_wave(enemies)
     screen = pygame.display.get_surface()
     
-    shoot_sound = load_sound('psh.ogg')
-    enemy_explosion_sound = load_sound('uddh.ogg')
+    shoot_sound = sound.load_sound('psh.ogg')
+    enemy_explosion_sound = sound.load_sound('uddh.ogg')
     
     
     ship_sprite = PlayerShip.PlayerShip()
