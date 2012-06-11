@@ -23,9 +23,6 @@ def generate_enemy_wave(enemies):
             enemy = Enemy.Enemy(enemyType, position)
             enemies.append(enemy)
             
-def draw_background(surface):
-    COLOUR_BACKGROUND = (0, 0, 0) #black
-    surface.fill(COLOUR_BACKGROUND)
     
 def draw_text(surface, score):
     global BORDER_LOWER
@@ -93,7 +90,7 @@ def game_loop():
         if (ticks % TICKS_PER_SECOND) == 0:
             fps = clock.get_fps()
             print fps
-        draw_background(screen)
+        graphics.draw_background(screen)
         draw_text(screen, score)
         
         dying_enemies = [] # empty list that gets filled as enemies get shot
