@@ -83,11 +83,11 @@ def draw_text(surface, score):
     pygame.draw.rect(surface, (0,200,0), (0,BORDER_LOWER+35,SCREEN_SIZE[0],3))
 def main():
     # Main program starts here
-    pygame.display.set_caption('Fluxagama') 
     
     
     pygame.mixer.pre_init(frequency=22050, size= -16, channels=2, buffer=512)
     pygame.init()
+    pygame.display.set_caption('Fluxagama') 
     if pygame.mixer and not pygame.mixer.get_init():
         print 'Warning, no sound'
         pygame.mixer = None
