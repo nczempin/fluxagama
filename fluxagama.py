@@ -38,8 +38,10 @@ def load_sound(filename):
     return dummysound()
 def generate_enemy_wave(enemies):
     global BORDER_UPPER
-    for i in range(4):
-        for j in range(2):
+    ENEMY_ROWS = 5
+    ENEMY_COLUMNS = 11
+    for i in range(ENEMY_ROWS):
+        for j in range(ENEMY_COLUMNS):
             position = [60 + j * 50, BORDER_UPPER + 110 + i * 50]
             enemyType = 2-(i+1)/2
             enemy = Enemy(enemyType, position)
