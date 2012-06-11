@@ -14,10 +14,8 @@ def generate_enemy_wave(enemies):
             enemyType = 2-(i+1)/2
             enemy = Enemy.Enemy(enemyType, position)
             enemies.append(enemy)
-            
-    
-
-def init_game():
+ 
+def init():
     global SCREEN_SIZE
     pygame.mixer.pre_init(frequency=22050, size=-16, channels=2, buffer=512)
     pygame.init()
@@ -123,7 +121,7 @@ def game_loop():
                 done = True
 
 def main():
-    init_game() 
+    init() 
     game_loop()
     pygame.quit()    
 
