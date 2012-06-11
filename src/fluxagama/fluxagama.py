@@ -1,6 +1,6 @@
 import pygame, os
 from pygame.locals import *
-import Enemy
+import graphics,Enemy,PlayerShip,Shot
 SCREEN_SIZE = (672, 780)
 BORDER_LEFT = 0
 BORDER_RIGHT = SCREEN_SIZE[0]
@@ -11,30 +11,13 @@ SHOT_SPEED = 10
 SHIP_SPEED = 4
 TICKS_PER_SECOND = 60
 
-class PlayerShip(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = load_image('gun.png')
-class Shot(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite.__init__(self)
-        self.image = load_image('shot.png')
-def load_image(filename):
-    "loads an image, prepares it for play"
-    print "Loading image "+filename
-    filename = os.path.join("../../data", filename)
-    try:
-        surface = pygame.image.load(filename)
-    except pygame.error:
-        raise SystemExit, 'Could not load image "%s" %s' % (filename, pygame.get_error())
-    return surface
 class dummysound:
     def play(self): pass
     
 def load_sound(filename):
     if not pygame.mixer: return dummysound()
     print "Loading sound "+filename
-    filename = os.path.join("../data", filename)
+    filename = os.path.join("../../data", filename)
     try:
         sound = pygame.mixer.Sound(filename)
         return sound
@@ -98,9 +81,9 @@ def game_loop():
     enemy_explosion_sound = load_sound('uddh.ogg')
     
     
-    ship_sprite = PlayerShip()
-    shot_sprite = Shot()
-    enemy_surface = (load_image("UFO.png"),load_image("enemy01.png"), load_image("enemy02.png"))
+    ship_sprite = PlayerShip.PlayerShip()
+    shot_sprite = Shot.Shot()
+    enemy_surface = (graphics.load_image("UFO.png"),graphics.load_image("enemy01.png"), graphics.load_image("enemy02.png"))
     ship_size = ship_sprite.image.get_size()
     shotX, shotY = shot_sprite.image.get_size()
     enemy0X, enemy0Y = enemy_surface[0].get_size() #TODO we assume for now that all enemies have the same size

@@ -1,8 +1,3 @@
-'''
-Created on 11.06.2012
-
-@author: nczempin
-'''
 import pygame
 class Enemy(pygame.sprite.Sprite):
     '''
