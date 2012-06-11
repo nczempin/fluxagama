@@ -23,19 +23,15 @@ def generate_enemy_wave(enemies):
             enemies.append(enemy)
             
     
-def main():
-    # Main program starts here
-    
-    
-    pygame.mixer.pre_init(frequency=22050, size= -16, channels=2, buffer=512)
+
+def init_game():
+    pygame.mixer.pre_init(frequency=22050, size=-16, channels=2, buffer=512)
     pygame.init()
-    pygame.display.set_caption('Fluxagama') 
     if pygame.mixer and not pygame.mixer.get_init():
         print 'Warning, no sound'
         pygame.mixer = None
-    window = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1])) 
-    game_loop()
-    pygame.quit()    
+    pygame.display.set_caption('Fluxagama')
+    window = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1]))
     
 def game_loop():
     enemies = []
@@ -127,6 +123,11 @@ def game_loop():
         for event in events: 
             if event.type == QUIT: 
                 done = True
+
+def main():
+    init_game() 
+    game_loop()
+    pygame.quit()    
 
 
 main()
