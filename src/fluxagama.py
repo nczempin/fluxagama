@@ -128,9 +128,7 @@ def game_loop():
         if (ticks % 60) == 0:
             fps = clock.get_fps()
             print fps
-        # draw black background
         draw_background(screen)
-        #draw text
         draw_text(screen, score)
         
         dying_enemies = [] # empty list that gets filled as enemies get shot
