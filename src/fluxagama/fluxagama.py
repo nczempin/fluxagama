@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from constants import *
 import graphics,sound,text
-import Enemy,PlayerShip,Shot
+import Enemy,PlayerShip,Shot, explosion
 
 def generate_enemy_wave(enemies):
     global BORDER_UPPER
@@ -93,6 +93,7 @@ def game_loop():
                     shot_exists = False
                     enemy_explosion_sound.play()
                     # TODO: enemy explosion graphics
+                    explosion.create(enemies[i].position)
         # remove all enemies that were hit.
         delta = 0
         for i in range(len(dying_enemies)):
@@ -115,6 +116,7 @@ def game_loop():
             screen.blit (shot_sprite.image, (shot_coorX, shot_coorY))
         for i in range(len(enemies)):
             enemies[i].draw(screen)
+        explosion.draw(screen)
         # draw player ship
         ship_sprite.draw(screen)
         # swap back and front buffers
