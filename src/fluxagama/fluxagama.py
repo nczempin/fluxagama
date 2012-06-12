@@ -105,6 +105,9 @@ def game_loop():
         # read keyboard and move player ship
         events = pygame.event.get()
         keystate = pygame.key.get_pressed()
+        if keystate[K_ESCAPE] == 1:
+            done = True
+            break
         if keystate[K_a] == 1:
             ship_sprite.move_left()
         if keystate[K_d] == 1:
