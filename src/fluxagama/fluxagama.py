@@ -70,7 +70,7 @@ def game_loop():
             if shot_exists:
                 if enemies[i].collidesWith(shot_coorX,shot_coorY,shotX,shotY):
                     # Collision!
-                    score += 10 * (enemies[i].type+1)
+                    score += enemies[i].get_score()
                     dying_enemies.append(i)
                     shot_exists = False
                     enemy_explosion_sound.play()

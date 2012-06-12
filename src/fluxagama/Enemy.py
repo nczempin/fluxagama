@@ -26,6 +26,7 @@ class Enemy(pygame.sprite.Sprite):
             pass
         else:
             return True
-
+    def get_score(self):
+        return 10 * (self.type+1)
     def __repr__(self):
         return str(self.type)+str(self.position)        
