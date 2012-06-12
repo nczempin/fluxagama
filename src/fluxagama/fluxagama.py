@@ -41,15 +41,15 @@ def game_loop():
     ship_sprite = PlayerShip.PlayerShip()
     shot_sprite = Shot.Shot()
     enemy_surface = (graphics.load_image("UFO.png"),graphics.load_image("enemy01.png"), graphics.load_image("enemy02.png"))
-    ship_size = ship_sprite.image.get_size()
+    ship_sprite.size = ship_sprite.image.get_size()
     shotX, shotY = shot_sprite.image.get_size()
     enemy0X, enemy0Y = enemy_surface[0].get_size() #TODO we assume for now that all enemies have the same size
     
     
     shot_coorX = 0.0
     shot_coorY = 0.0
-    ship_coorX = (SCREEN_SIZE[0] - ship_size[0]) / 2
-    ship_coorY = BORDER_LOWER - ship_size[1]
+    ship_sprite.coorX = (SCREEN_SIZE[0] - ship_sprite.size[0]) / 2
+    ship_sprite.coorY = BORDER_LOWER - ship_sprite.size[1]
     shot_exists = False
     score = 0
     clock = pygame.time.Clock()
@@ -99,23 +99,23 @@ def game_loop():
             if shot_coorY <= BORDER_UPPER:
                 shot_exists = False
         # draw player ship
-        screen.blit (ship_sprite.image, (ship_coorX, ship_coorY))
+        screen.blit (ship_sprite.image, (ship_sprite.coorX, ship_sprite.coorY))
         # swap back and front buffers
         pygame.display.flip()
         # read keyboard and move player ship
         events = pygame.event.get()
         keystate = pygame.key.get_pressed()
         if keystate[K_a] == 1:
-            if ship_coorX > BORDER_LEFT+60:
-                ship_coorX -= SHIP_SPEED
+            if ship_sprite.coorX > BORDER_LEFT+60:
+                ship_sprite.coorX -= SHIP_SPEED
         if keystate[K_d] == 1:
-            if ship_coorX + ship_size[0] < BORDER_RIGHT-60:
-                ship_coorX += SHIP_SPEED
+            if ship_sprite.coorX + ship_sprite.size[0] < BORDER_RIGHT-60:
+                ship_sprite.coorX += SHIP_SPEED
         if keystate[K_SPACE] == 1:
             if not shot_exists:
                 shoot_sound.play()
                 shot_exists = True
-                shot_coorX, shot_coorY = ship_coorX + (ship_size[0] - shotX) / 2, ship_coorY - shotY #generate shot near top middle of gun
+                shot_coorX, shot_coorY = ship_sprite.coorX + (ship_sprite.size[0] - shotX) / 2, ship_sprite.coorY - shotY #generate shot near top middle of gun
         for event in events: 
             if event.type == QUIT: 
                 done = True
