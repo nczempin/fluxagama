@@ -99,7 +99,7 @@ def game_loop():
             if shot_coorY <= BORDER_UPPER:
                 shot_exists = False
         # draw player ship
-        screen.blit (ship_sprite.image, (ship_sprite.coorX, ship_sprite.coorY))
+        ship_sprite.draw(screen)
         # swap back and front buffers
         pygame.display.flip()
         # read keyboard and move player ship
