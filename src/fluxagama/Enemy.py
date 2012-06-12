@@ -15,5 +15,17 @@ class Enemy(pygame.sprite.Sprite):
    
     def draw(self,surface):
         surface.blit (enemy_surface[self.type], self.position)
+    def collidesWith(self, shot_coorX, shot_coorY,shotX,shotY):
+        if self.position[1] + self.enemy0Y < shot_coorY:
+            pass
+        elif self.position[1] > shot_coorY + shotY:
+            pass
+        elif self.position[0] > shot_coorX + shotX:
+            pass
+        elif self.position[0] + self.enemy0X < shot_coorX:
+            pass
+        else:
+            return True
+
     def __repr__(self):
         return str(self.type)+str(self.position)        

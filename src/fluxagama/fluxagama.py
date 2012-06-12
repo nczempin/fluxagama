@@ -65,19 +65,10 @@ def game_loop():
         
         dying_enemies = [] # empty list that gets filled as enemies get shot
         for i in range(len(enemies)):
-            pos = enemies[i].position
             enemies[i].draw(screen)
             # collision detection shot <-> enemy
             if shot_exists:
-                if pos[1] + enemies[i].enemy0Y < shot_coorY:
-                    pass
-                elif pos[1] > shot_coorY + shotY:
-                    pass
-                elif pos[0] > shot_coorX + shotX:
-                    pass
-                elif pos[0] + enemies[i].enemy0X < shot_coorX:
-                    pass
-                else:
+                if enemies[i].collidesWith(shot_coorX,shot_coorY,shotX,shotY):
                     # Collision!
                     score += 10 * (enemies[i].type+1)
                     dying_enemies.append(i)
