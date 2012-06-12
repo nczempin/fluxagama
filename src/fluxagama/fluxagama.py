@@ -60,38 +60,7 @@ def game_loop():
         if (ticks % TICKS_PER_SECOND) == 0:
             fps = clock.get_fps()
             print fps
-        graphics.draw_background(screen)
-        text.draw_text(screen, score)
-        
-        dying_enemies = [] # empty list that gets filled as enemies get shot
-        for i in range(len(enemies)):
-            enemies[i].draw(screen)
-            # collision detection shot <-> enemy
-            if shot_exists:
-                if enemies[i].collidesWith(shot_coorX,shot_coorY,shotX,shotY):
-                    # Collision!
-                    score += enemies[i].get_score()
-                    dying_enemies.append(i)
-                    shot_exists = False
-                    enemy_explosion_sound.play()
-                    # TODO: enemy explosion graphics
-        delta = 0
-        for i in range(len(dying_enemies)):
-            del enemies[dying_enemies[i + delta]]
-            delta += 1 # each time we remove one, the index of all the others must be reduced. This assumes that the list of dying enemies is sorted
-        if len(enemies) == 0:
-            generate_enemy_wave(enemies)
-            
-        if shot_exists:
-            # draw and move shot
-            screen.blit (shot_sprite.image, (shot_coorX, shot_coorY))
-            shot_coorY -= SHOT_SPEED
-            if shot_coorY <= BORDER_UPPER:
-                shot_exists = False
-        # draw player ship
-        ship_sprite.draw(screen)
-        # swap back and front buffers
-        pygame.display.flip()
+        #####################################################################################
         # read keyboard and move player ship
         events = pygame.event.get()
         keystate = pygame.key.get_pressed()
@@ -110,12 +79,49 @@ def game_loop():
         for event in events: 
             if event.type == QUIT: 
                 done = True
+                break
+
+        #######################################################################################
+        dying_enemies = [] # empty list that gets filled as enemies get shot
+        for i in range(len(enemies)):
+            # collision detection shot <-> enemy
+            if shot_exists:
+                if enemies[i].collidesWith(shot_coorX,shot_coorY,shotX,shotY):
+                    # Collision!
+                    score += enemies[i].get_score()
+                    dying_enemies.append(i)
+                    shot_exists = False
+                    enemy_explosion_sound.play()
+                    # TODO: enemy explosion graphics
+        delta = 0
+        for i in range(len(dying_enemies)):
+            del enemies[dying_enemies[i + delta]]
+            delta += 1 # each time we remove one, the index of all the others must be reduced. This assumes that the list of dying enemies is sorted
+        if len(enemies) == 0:
+            generate_enemy_wave(enemies)
+            
+        if shot_exists:
+            #move shot
+            shot_coorY -= SHOT_SPEED
+            if shot_coorY <= BORDER_UPPER:
+                shot_exists = False
+        ############################################################################################
+        graphics.draw_background(screen)
+        text.draw_text(screen, score)
+        if shot_exists:
+            # draw shot
+            screen.blit (shot_sprite.image, (shot_coorX, shot_coorY))
+        for i in range(len(enemies)):
+            enemies[i].draw(screen)
+        # draw player ship
+        ship_sprite.draw(screen)
+        # swap back and front buffers
+        pygame.display.flip()
 
 def main():
     init() 
     game_loop()
     pygame.quit()    
-
 
 main()
 
