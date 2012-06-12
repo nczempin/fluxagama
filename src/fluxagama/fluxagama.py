@@ -40,7 +40,7 @@ def game_loop():
     
     ship_sprite = PlayerShip.PlayerShip()
     shot_sprite = Shot.Shot()
-    enemy_surface = (graphics.load_image("UFO.png"),graphics.load_image("enemy01.png"), graphics.load_image("enemy02.png"))
+    enemy_surface = (graphics.load_image("enemy00.png"),graphics.load_image("enemy01.png"), graphics.load_image("enemy02.png"))
     ship_sprite.size = ship_sprite.image.get_size()
     shotX, shotY = shot_sprite.image.get_size()
     enemy0X, enemy0Y = enemy_surface[0].get_size() #TODO we assume for now that all enemies have the same size
