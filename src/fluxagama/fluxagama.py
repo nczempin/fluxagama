@@ -106,11 +106,9 @@ def game_loop():
         events = pygame.event.get()
         keystate = pygame.key.get_pressed()
         if keystate[K_a] == 1:
-            if ship_sprite.coorX > BORDER_LEFT+60:
-                ship_sprite.coorX -= SHIP_SPEED
+            ship_sprite.move_left()
         if keystate[K_d] == 1:
-            if ship_sprite.coorX + ship_sprite.size[0] < BORDER_RIGHT-60:
-                ship_sprite.coorX += SHIP_SPEED
+            ship_sprite.move_right()
         if keystate[K_SPACE] == 1:
             if not shot_exists:
                 shoot_sound.play()
