@@ -40,10 +40,8 @@ def game_loop():
     
     ship_sprite = PlayerShip.PlayerShip()
     shot_sprite = Shot.Shot()
-    enemy_surface = (graphics.load_image("enemy00.png"),graphics.load_image("enemy01.png"), graphics.load_image("enemy02.png"))
     ship_sprite.size = ship_sprite.image.get_size()
     shotX, shotY = shot_sprite.image.get_size()
-    enemy0X, enemy0Y = enemy_surface[0].get_size() #TODO we assume for now that all enemies have the same size
     
     
     shot_coorX = 0.0
@@ -68,16 +66,16 @@ def game_loop():
         dying_enemies = [] # empty list that gets filled as enemies get shot
         for i in range(len(enemies)):
             pos = enemies[i].position
-            screen.blit (enemy_surface[enemies[i].type], pos)
+            enemies[i].draw(screen)
             # collision detection shot <-> enemy
             if shot_exists:
-                if pos[1] + enemy0Y < shot_coorY:
+                if pos[1] + enemies[i].enemy0Y < shot_coorY:
                     pass
                 elif pos[1] > shot_coorY + shotY:
                     pass
                 elif pos[0] > shot_coorX + shotX:
                     pass
-                elif pos[0] + enemy0X < shot_coorX:
+                elif pos[0] + enemies[i].enemy0X < shot_coorX:
                     pass
                 else:
                     # Collision!
@@ -92,6 +90,7 @@ def game_loop():
             delta += 1 # each time we remove one, the index of all the others must be reduced. This assumes that the list of dying enemies is sorted
         if len(enemies) == 0:
             generate_enemy_wave(enemies)
+            
         if shot_exists:
             # draw and move shot
             screen.blit (shot_sprite.image, (shot_coorX, shot_coorY))
