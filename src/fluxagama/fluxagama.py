@@ -82,9 +82,9 @@ def game_loop():
                 break
 
         #######################################################################################
+        # collision detection shot <-> enemies
         dying_enemies = [] # empty list that gets filled as enemies get shot
         for i in range(len(enemies)):
-            # collision detection shot <-> enemy
             if shot_exists:
                 if enemies[i].collidesWith(shot_coorX,shot_coorY,shotX,shotY):
                     # Collision!
@@ -93,13 +93,15 @@ def game_loop():
                     shot_exists = False
                     enemy_explosion_sound.play()
                     # TODO: enemy explosion graphics
+        # remove all enemies that were hit.
         delta = 0
         for i in range(len(dying_enemies)):
             del enemies[dying_enemies[i + delta]]
             delta += 1 # each time we remove one, the index of all the others must be reduced. This assumes that the list of dying enemies is sorted
+        # detect end of wave
         if len(enemies) == 0:
             generate_enemy_wave(enemies)
-            
+        ############################################################################################
         if shot_exists:
             #move shot
             shot_coorY -= SHOT_SPEED
@@ -117,6 +119,7 @@ def game_loop():
         ship_sprite.draw(screen)
         # swap back and front buffers
         pygame.display.flip()
+        ###############################################################################################
 
 def main():
     init() 
