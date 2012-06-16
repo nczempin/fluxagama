@@ -19,7 +19,7 @@ class Explosion(pygame.sprite.Sprite):
         self.position = position
         pygame.sprite.Sprite.__init__(self)
         self.image = graphics.load_image("explosion00.png")
-        self.ttl = 60 #number of ticks that this will "live"
+        self.ttl = 10 #number of ticks that this will "live"
     def draw(self, surface):
         surface.blit(self.image,self.position)
         self.ttl -= 1
