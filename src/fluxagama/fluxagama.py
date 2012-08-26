@@ -27,12 +27,13 @@ def generate_enemy_wave(enemies):
     global BORDER_UPPER
     ENEMY_ROWS = 5
     ENEMY_COLUMNS = 11
+    
     for i in range(ENEMY_ROWS):
         for j in range(ENEMY_COLUMNS):
             position = [60 + j * 50, BORDER_UPPER + 110 + i * 50]
             enemyType = 2-(i+1)/2
-            enemy = Enemy.Enemy(enemyType, position)
-            enemies.append(enemy)
+            enemy_sprite = Enemy.Enemy(enemyType, position)
+            enemies.append(enemy_sprite)
  
 def init():
     global SCREEN_SIZE
@@ -102,7 +103,7 @@ def game_loop():
             if not shot_exists:
                 shoot_sound.play()
                 shot_exists = True
-                shot_coorX, shot_coorY = ship_sprite.coorX + (ship_sprite.size[0] - shotX) / 2, ship_sprite.coorY - shotY #generate shot near top middle of gun
+                shot_sprite.position[0], shot_sprite.position[1] = ship_sprite.position[0] + (ship_sprite.size[0] - shot_sprite.size[0]) / 2, ship_sprite.position[1] - shot_sprite.size[1] #generate shot near top middle of gun
         if keystate[K_e] == 1:
             if not enemy_shot_exists:
                 #shoot_sound.play()
@@ -120,7 +121,7 @@ def game_loop():
         dying_enemies = [] # empty list that gets filled as enemies get shot
         for i in range(len(enemies)):
             if shot_exists:
-                if enemies[i].collidesWith(shot_coorX,shot_coorY,shotX,shotY):
+                if collidesWith(shot_sprite,enemies[i]):
                     # Collision!
                     score += enemies[i].get_score()
                     dying_enemies.append(i)
@@ -128,6 +129,7 @@ def game_loop():
                     enemy_explosion_sound.play()
                     # TODO: enemy explosion graphics
                     explosion.create(enemies[i].position)
+                    print "zerstort"
         # remove all enemies that were hit.
         delta = 0
         for i in range(len(dying_enemies)):
@@ -147,14 +149,14 @@ def game_loop():
                 # TODO: enemy explosion graphics
                 #explosion.create(enemies[i].position)
         # remove all enemies that were hit.
-         # detect end of wave
+        # detect end of wave
         if len(enemies) == 0:
             generate_enemy_wave(enemies)
         ############################################################################################
         if shot_exists:
             #move shot
-            shot_coorY -= SHOT_SPEED
-            if shot_coorY <= BORDER_UPPER:
+            shot_sprite.position[1] -= SHOT_SPEED
+            if shot_sprite.position[1] <= BORDER_UPPER:
                 shot_exists = False
         if enemy_shot_exists:
             #move shot
@@ -166,7 +168,7 @@ def game_loop():
         text.draw_text(screen, score)
         if shot_exists:
             # draw shot
-            screen.blit (shot_sprite.image, (shot_coorX, shot_coorY))
+            screen.blit (shot_sprite.image, (shot_sprite.position[0], shot_sprite.position[1]))
         if enemy_shot_exists:
             # draw shot
             screen.blit (shot_sprite.image, (enemy_shot_coorX, enemy_shot_coorY))
