@@ -1,6 +1,6 @@
 import pygame
 from constants import *
-COLOUR_TEXT = (255, 255, 255) # white
+
 score1titletext=None
 score1titletextpos=None
 def draw_text(surface, score):
