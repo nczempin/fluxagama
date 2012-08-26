@@ -51,7 +51,7 @@ def game_loop():
     ship_sprite.coorX = (SCREEN_SIZE[0] - ship_sprite.size[0]) / 2
     ship_sprite.coorY = BORDER_LOWER - ship_sprite.size[1]
     shot_exists = False
-    enemy_shot_exists = True
+    enemy_shot_exists = False
     score = 0
     clock = pygame.time.Clock()
     ticks = 0
@@ -79,6 +79,13 @@ def game_loop():
                 shoot_sound.play()
                 shot_exists = True
                 shot_coorX, shot_coorY = ship_sprite.coorX + (ship_sprite.size[0] - shotX) / 2, ship_sprite.coorY - shotY #generate shot near top middle of gun
+        if keystate[K_e] == 1:
+            if not enemy_shot_exists:
+                #shoot_sound.play()
+                enemy_shot_exists = True
+                enemy_shot_coorX = 25.0
+                enemy_shot_coorY = 10.0
+                #shot_coorX, shot_coorY = ship_sprite.coorX + (ship_sprite.size[0] - shotX) / 2, ship_sprite.coorY - shotY #generate shot near top middle of gun
         for event in events: 
             if event.type == QUIT: 
                 done = True
