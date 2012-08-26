@@ -10,5 +10,4 @@ def load_image(filename):
         raise SystemExit, 'Could not load image "%s" %s' % (filename, pygame.get_error())
     return surface
 def draw_background(surface):
-    
     surface.fill(COLOUR_BACKGROUND)
