@@ -46,9 +46,12 @@ def game_loop():
     
     shot_coorX = 0.0
     shot_coorY = 0.0
+    enemy_shot_coorX = 25.0
+    enemy_shot_coorY = 10.0
     ship_sprite.coorX = (SCREEN_SIZE[0] - ship_sprite.size[0]) / 2
     ship_sprite.coorY = BORDER_LOWER - ship_sprite.size[1]
     shot_exists = False
+    enemy_shot_exists = True
     score = 0
     clock = pygame.time.Clock()
     ticks = 0
@@ -108,12 +111,21 @@ def game_loop():
             shot_coorY -= SHOT_SPEED
             if shot_coorY <= BORDER_UPPER:
                 shot_exists = False
+        if enemy_shot_exists:
+            #move shot
+            enemy_shot_coorY += SHOT_SPEED
+            if enemy_shot_coorY >= BORDER_LOWER:
+                enemy_shot_exists = False
         ############################################################################################
         graphics.draw_background(screen)
         text.draw_text(screen, score)
         if shot_exists:
             # draw shot
             screen.blit (shot_sprite.image, (shot_coorX, shot_coorY))
+        if enemy_shot_exists:
+            # draw shot
+            screen.blit (shot_sprite.image, (enemy_shot_coorX, enemy_shot_coorY))
+
         for i in range(len(enemies)):
             enemies[i].draw(screen)
         explosion.draw(screen)
