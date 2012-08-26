@@ -84,7 +84,7 @@ def game_loop():
                 #shoot_sound.play()
                 enemy_shot_exists = True
                 enemy_shot_coorX = random.randint(BORDER_LEFT, BORDER_RIGHT)
-                enemy_shot_coorY = 10.0
+                enemy_shot_coorY = 400.0
                 #shot_coorX, shot_coorY = ship_sprite.coorX + (ship_sprite.size[0] - shotX) / 2, ship_sprite.coorY - shotY #generate shot near top middle of gun
         for event in events: 
             if event.type == QUIT: 
