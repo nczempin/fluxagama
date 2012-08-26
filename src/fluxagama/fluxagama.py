@@ -63,14 +63,14 @@ def game_loop():
     shot_sprite = Shot.Shot([0,0])
     enemy_shot_sprite = Shot.Shot([0,0])
     ship_sprite.size = ship_sprite.image.get_size()
-    shotX, shotY = shot_sprite.image.get_size()
-    enemy_shotX, enemy_shotY = shotX, shotY
+#    shotX, shotY = shot_sprite.image.get_size()
+#    enemy_shotX, enemy_shotY = shotX, shotY
     
     ship_sprite.coorX = ship_sprite.position[0]
     ship_sprite.coorY = ship_sprite.position[1]
     
-    shot_coorX = 0.0
-    shot_coorY = 0.0
+#    shot_coorX = 0.0
+#    shot_coorY = 0.0
     enemy_shot_coorX = 25.0
     enemy_shot_coorY = 10.0
     ship_sprite.coorX = (SCREEN_SIZE[0] - ship_sprite.size[0]) / 2
@@ -87,7 +87,7 @@ def game_loop():
         ticks += 1
         if (ticks % TICKS_PER_SECOND) == 0:
             fps = clock.get_fps()
-            print fps
+#            print fps
         #####################################################################################
         # read keyboard and move player ship
         events = pygame.event.get()
@@ -108,8 +108,8 @@ def game_loop():
             if not enemy_shot_exists:
                 #shoot_sound.play()
                 enemy_shot_exists = True
-                enemy_shot_coorX = 400.0 #random.randint(BORDER_LEFT, BORDER_RIGHT)
-                enemy_shot_coorY = 400.0
+                enemy_shot_sprite.position[0] = 400.0 #random.randint(BORDER_LEFT, BORDER_RIGHT)
+                enemy_shot_sprite.position[1] = 400.0
                 #shot_coorX, shot_coorY = ship_sprite.coorX + (ship_sprite.size[0] - shotX) / 2, ship_sprite.coorY - shotY #generate shot near top middle of gun
         for event in events: 
             if event.type == QUIT: 
@@ -129,7 +129,7 @@ def game_loop():
                     enemy_explosion_sound.play()
                     # TODO: enemy explosion graphics
                     explosion.create(enemies[i].position)
-                    print "zerstort"
+                    #print "zerstort"
         # remove all enemies that were hit.
         delta = 0
         for i in range(len(dying_enemies)):
@@ -142,12 +142,9 @@ def game_loop():
         if enemy_shot_exists:
             if collidesWith(enemy_shot_sprite,ship_sprite):
                 # Collision!
-                #score += enemies[i].get_score()
-                #dying_enemies.append(i)
                 enemy_shot_exists = False
                 enemy_explosion_sound.play()
-                # TODO: enemy explosion graphics
-                #explosion.create(enemies[i].position)
+                # TODO: ship explosion graphics
         # remove all enemies that were hit.
         # detect end of wave
         if len(enemies) == 0:
@@ -160,8 +157,8 @@ def game_loop():
                 shot_exists = False
         if enemy_shot_exists:
             #move shot
-            enemy_shot_coorY += SHOT_SPEED
-            if enemy_shot_coorY >= BORDER_LOWER:
+            enemy_shot_sprite.position[1] += SHOT_SPEED
+            if enemy_shot_sprite.position[1] >= BORDER_LOWER:
                 enemy_shot_exists = False
         ############################################################################################
         graphics.draw_background(screen)
@@ -171,7 +168,7 @@ def game_loop():
             screen.blit (shot_sprite.image, (shot_sprite.position[0], shot_sprite.position[1]))
         if enemy_shot_exists:
             # draw shot
-            screen.blit (shot_sprite.image, (enemy_shot_coorX, enemy_shot_coorY))
+            screen.blit (shot_sprite.image, (enemy_shot_sprite.position[0], enemy_shot_sprite.position[1]))
 
         for i in range(len(enemies)):
             enemies[i].draw(screen)
