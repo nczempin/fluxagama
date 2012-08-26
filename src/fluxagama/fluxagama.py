@@ -1,4 +1,4 @@
-import pygame
+import pygame, random
 from pygame.locals import *
 from constants import *
 import graphics,sound,text
@@ -83,7 +83,7 @@ def game_loop():
             if not enemy_shot_exists:
                 #shoot_sound.play()
                 enemy_shot_exists = True
-                enemy_shot_coorX = 25.0
+                enemy_shot_coorX = random.randint(BORDER_LEFT, BORDER_RIGHT)
                 enemy_shot_coorY = 10.0
                 #shot_coorX, shot_coorY = ship_sprite.coorX + (ship_sprite.size[0] - shotX) / 2, ship_sprite.coorY - shotY #generate shot near top middle of gun
         for event in events: 
