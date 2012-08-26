@@ -1,9 +1,9 @@
 import pygame, graphics
 from constants import *
 class PlayerShip(pygame.sprite.Sprite):
-    def __init__(self):
-        #TODO initialize position
+    def __init__(self, position):
         pygame.sprite.Sprite.__init__(self)
+        self.position = position
         self.image = graphics.load_image('gun.png')
     def move_left(self):
         global BORDER_LEFT, SHIP_SPEED

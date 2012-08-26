@@ -4,6 +4,25 @@ from constants import *
 import graphics,sound,text
 import Enemy,PlayerShip,Shot, explosion
 
+def collidesWith(sprite1, sprite2):
+    x1 = sprite1.position[0]
+    y1 = sprite1.position[1]
+    x2 = sprite2.position[0]
+    y2 = sprite2.position[1]
+    x1size = sprite1.size[0]
+    y1size = sprite1.size[1]
+    x2size = sprite2.size[0]
+    y2size = sprite2.size[1]
+    if y1 + y1size < y2:
+        pass
+    elif y1 > y2 + y2size:
+        pass
+    elif x1 + x1size < x2:
+        pass
+    elif x1 > x2 + x2size:
+        pass
+    else:
+        return True
 def generate_enemy_wave(enemies):
     global BORDER_UPPER
     ENEMY_ROWS = 5
@@ -37,12 +56,17 @@ def game_loop():
     shoot_sound = sound.load_sound('psh.ogg')
     enemy_explosion_sound = sound.load_sound('uddh.ogg')
     
+    position = [(SCREEN_SIZE[0]) / 2, BORDER_LOWER-10]
     
-    ship_sprite = PlayerShip.PlayerShip()
-    shot_sprite = Shot.Shot()
+    ship_sprite = PlayerShip.PlayerShip(position)
+    shot_sprite = Shot.Shot([0,0])
+    enemy_shot_sprite = Shot.Shot([0,0])
     ship_sprite.size = ship_sprite.image.get_size()
     shotX, shotY = shot_sprite.image.get_size()
+    enemy_shotX, enemy_shotY = shotX, shotY
     
+    ship_sprite.coorX = ship_sprite.position[0]
+    ship_sprite.coorY = ship_sprite.position[1]
     
     shot_coorX = 0.0
     shot_coorY = 0.0
@@ -83,7 +107,7 @@ def game_loop():
             if not enemy_shot_exists:
                 #shoot_sound.play()
                 enemy_shot_exists = True
-                enemy_shot_coorX = random.randint(BORDER_LEFT, BORDER_RIGHT)
+                enemy_shot_coorX = 400.0 #random.randint(BORDER_LEFT, BORDER_RIGHT)
                 enemy_shot_coorY = 400.0
                 #shot_coorX, shot_coorY = ship_sprite.coorX + (ship_sprite.size[0] - shotX) / 2, ship_sprite.coorY - shotY #generate shot near top middle of gun
         for event in events: 
@@ -109,7 +133,21 @@ def game_loop():
         for i in range(len(dying_enemies)):
             del enemies[dying_enemies[i + delta]]
             delta += 1 # each time we remove one, the index of all the others must be reduced. This assumes that the list of dying enemies is sorted
-        # detect end of wave
+            
+        # collision detection enemy_shot <-> PlayerShip
+        #dying_enemies = [] # empty list that gets filled as enemies get shot
+        
+        if enemy_shot_exists:
+            if collidesWith(enemy_shot_sprite,ship_sprite):
+                # Collision!
+                #score += enemies[i].get_score()
+                #dying_enemies.append(i)
+                enemy_shot_exists = False
+                enemy_explosion_sound.play()
+                # TODO: enemy explosion graphics
+                #explosion.create(enemies[i].position)
+        # remove all enemies that were hit.
+         # detect end of wave
         if len(enemies) == 0:
             generate_enemy_wave(enemies)
         ############################################################################################
