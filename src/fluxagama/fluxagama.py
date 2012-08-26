@@ -186,6 +186,5 @@ def main():
     init() 
     game_loop()
     pygame.quit()    
-
 main()
 
