@@ -1,5 +1,5 @@
-import pygame, graphics, Sprite
+import pygame, graphics, FluxaSprite
 from constants import *
-class PlayerShip(Sprite.Sprite):
+class PlayerShip(FluxaSprite.FluxaSprite):
     def __init__(self,position):
-        Sprite.Sprite.__init__(self,position,'gun.png')
+        FluxaSprite.FluxaSprite.__init__(self,position,'gun.png')

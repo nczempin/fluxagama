@@ -1,7 +1,8 @@
-import pygame, Sprite
+import pygame
 import graphics
+import FluxaSprite
 enemy_filenames = ("enemy00.png","enemy01.png", "enemy02.png")
-class Enemy(Sprite.Sprite):
+class Enemy(FluxaSprite.FluxaSprite):
     '''
     classdocs
     '''
@@ -11,7 +12,7 @@ class Enemy(Sprite.Sprite):
         '''
         global enemy_surface
         self.type = enemyType
-        Sprite.Sprite.__init__(self,position,enemy_filenames[self.type])
+        FluxaSprite.FluxaSprite.__init__(self,position,enemy_filenames[self.type])
     def get_score(self):
         return 10 * (self.type+1)
     def __repr__(self):

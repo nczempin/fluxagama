@@ -4,6 +4,7 @@ from constants import *
 score1titletext=None
 score1titletextpos=None
 def draw_text(surface, score):
+    global COLOUR_TEXT
     global BORDER_LOWER
     global SCREEN_SIZE
     global score1titletext

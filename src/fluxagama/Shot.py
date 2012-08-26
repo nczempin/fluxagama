@@ -1,4 +1,4 @@
-import pygame, graphics,Sprite
-class Shot(Sprite.Sprite):
+import pygame, graphics,FluxaSprite
+class Shot(FluxaSprite.FluxaSprite):
     def __init__(self, position):
-        Sprite.Sprite.__init__(self,position,'shot.png')
+        FluxaSprite.FluxaSprite.__init__(self,position,'shot.png')

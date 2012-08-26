@@ -1,6 +1,7 @@
-import pygame, graphics
+import pygame
+import graphics
 from constants import *
-class Sprite(pygame.sprite.Sprite):
+class FluxaSprite(pygame.sprite.Sprite):
     def __init__(self, position,image):
         pygame.sprite.Sprite.__init__(self)
         self.position = position

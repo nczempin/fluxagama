@@ -71,8 +71,6 @@ def game_loop():
     
 #    shot_coorX = 0.0
 #    shot_coorY = 0.0
-    enemy_shot_coorX = 25.0
-    enemy_shot_coorY = 10.0
     ship_sprite.coorX = (SCREEN_SIZE[0] - ship_sprite.size[0]) / 2
     ship_sprite.coorY = BORDER_LOWER - ship_sprite.size[1]
     shot_exists = False

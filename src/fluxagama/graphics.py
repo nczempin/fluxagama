@@ -11,3 +11,4 @@ def load_image(filename):
     return surface
 def draw_background(surface):
     surface.fill(COLOUR_BACKGROUND)
+ 
