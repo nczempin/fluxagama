@@ -11,7 +11,7 @@ class FluxaSprite(pygame.sprite.Sprite):
         surface.blit (self.image, (self.position[0], self.position[1]))
         
         
-        
+
 #For Ships: YOLOBERT
     def move_left(self):
         global BORDER_LEFT, SHIP_SPEED
