@@ -12,7 +12,7 @@ class FluxaSprite(pygame.sprite.Sprite):
         
         
         
-#For Ships:
+#For Ships: YOLOBERT
     def move_left(self):
         global BORDER_LEFT, SHIP_SPEED
         if self.position[0] > BORDER_LEFT+60:
