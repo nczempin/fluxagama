@@ -1,4 +1,12 @@
 *.py[co]
+__pycache__/
+
+# IDE projects
+.project
+.pydevproject
+
+# OS generated files
+.DS_Store
 
 # Packages
 *.egg
@@ -12,6 +20,14 @@ var
 sdist
 develop-eggs
 .installed.cfg
+
+# Build artifacts
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+*.log
 
 # Installer logs
 pip-log.txt
