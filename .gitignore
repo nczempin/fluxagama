@@ -1,27 +1,24 @@
+# Byte-compiled / optimized files
 *.py[co]
 __pycache__/
 
-# IDE projects
+# IDE project files
 .project
 .pydevproject
 
 # OS generated files
 .DS_Store
 
-# Packages
-*.egg
-*.egg-info
-dist
-build
-eggs
-parts
-bin
-var
-sdist
-develop-eggs
-.installed.cfg
+# Distribution / packaging
+build/
+dist/
+.eggs/
+*.egg-info/
 
 # Build artifacts
+*.egg
+parts/
+var/
 *.o
 *.so
 *.dylib
@@ -36,8 +33,8 @@ pip-log.txt
 .coverage
 .tox
 
-#Translations
+# Translations
 *.mo
 
-#Mr Developer
+# Mr Developer configuration
 .mr.developer.cfg
