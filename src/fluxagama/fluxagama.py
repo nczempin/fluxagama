@@ -1,8 +1,15 @@
-import pygame, random
+from __future__ import print_function
+import pygame
+import random
 from pygame.locals import *
 from constants import *
-import graphics,sound,text
-import Enemy,PlayerShip,Shot, explosion
+import graphics
+import sound
+import text
+import Enemy
+import PlayerShip
+import Shot
+import explosion
 
 def collidesWith(sprite1, sprite2):
     x1 = sprite1.position[0]
@@ -40,7 +47,7 @@ def init():
     pygame.mixer.pre_init(frequency=22050, size=-16, channels=2, buffer=512)
     pygame.init()
     if pygame.mixer and not pygame.mixer.get_init():
-        print 'Warning, no sound'
+        print('Warning, no sound')
         pygame.mixer = None
     pygame.display.set_caption('Fluxagama')
     window = pygame.display.set_mode((SCREEN_SIZE[0], SCREEN_SIZE[1]))
