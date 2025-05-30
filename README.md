@@ -3,8 +3,15 @@
 ## What Problem Does This Solve?
 Fluxagama is a 2D vertical shooter game built with PyGame that provides an entertaining gaming experience while demonstrating game development principles in Python. It offers a classic arcade-style shooter experience with modern programming techniques.
 
+http://nczempin.github.com/fluxagama/
+
+Development
+-----------
+Run `make` to install dependencies, execute linters and tests, and build a
+wheel in `dist/`.
+
 ## Who Is This For?
-- Casual gamers looking for a retro-style vertical shooter
+
 - Python developers interested in game development
 - Students learning PyGame and game programming concepts
 - Anyone interested in exploring open-source game development
@@ -83,7 +90,7 @@ Fluxagama is a 2D vertical shooter game built with PyGame that provides an enter
 - Escape: Pause/Menu
 
 ## Play Online
-You can play the game online at: http://nczempin.github.com/fluxagama/
+(not yet) You can play the game online at: http://nczempin.github.com/fluxagama/
 
 ## Development Status
-This is an open-source game project in active development. Contributions and feedback are welcome.
+This is an open-source game project in semi-active development. Contributions and feedback are welcome.
