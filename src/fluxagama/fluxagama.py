@@ -2,14 +2,14 @@ from __future__ import print_function
 import pygame
 import random
 from pygame.locals import *
-from constants import *
-import graphics
-import sound
-import text
-import Enemy
-import PlayerShip
-import Shot
-import explosion
+from .constants import *
+from . import graphics
+from . import sound
+from . import text
+from . import Enemy
+from . import PlayerShip
+from . import Shot
+from . import explosion
 
 def collidesWith(sprite1, sprite2):
     x1 = sprite1.position[0]
@@ -38,7 +38,7 @@ def generate_enemy_wave(enemies):
     for i in range(ENEMY_ROWS):
         for j in range(ENEMY_COLUMNS):
             position = [60 + j * 50, BORDER_UPPER + 110 + i * 50]
-            enemyType = 2-(i+1)/2
+            enemyType = 2-(i+1)//2
             enemy_sprite = Enemy.Enemy(enemyType, position)
             enemies.append(enemy_sprite)
  
@@ -188,5 +188,7 @@ def main():
     init() 
     game_loop()
     pygame.quit()    
-main()
+
+if __name__ == "__main__":
+    main()
 

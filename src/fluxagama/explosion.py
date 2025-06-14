@@ -1,6 +1,6 @@
 import pygame
-import graphics
-import FluxaSprite
+from . import graphics
+from . import FluxaSprite
 #explosion_image = graphics.load_image("explosion00.png")
 
 e = None

@@ -1,6 +1,6 @@
 import pygame
-import graphics
-import FluxaSprite
+from . import graphics
+from . import FluxaSprite
 enemy_filenames = ("enemy00.png","enemy01.png", "enemy02.png")
 class Enemy(FluxaSprite.FluxaSprite):
     '''

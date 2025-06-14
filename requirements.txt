@@ -1,2 +1,3 @@
+pygame
 flake8
 pytest
