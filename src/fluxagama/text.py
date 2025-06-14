@@ -1,5 +1,5 @@
 import pygame
-from constants import *
+from .constants import *
 
 score1titletext=None
 score1titletextpos=None
