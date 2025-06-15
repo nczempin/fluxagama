@@ -1,96 +1,56 @@
 # Fluxagama: 2D Vertical Shooter
 
-## What Problem Does This Solve?
-Fluxagama is a 2D vertical shooter game built with PyGame that provides an entertaining gaming experience while demonstrating game development principles in Python. It offers a classic arcade-style shooter experience with modern programming techniques.
+> **🗄️ Archived Project**: This was a learning project for my kids when they were getting into programming. It's no longer actively developed, but kept here for nostalgia. One of them is a game developer now (though probably not because of this 😄).
 
-http://nczempin.github.com/fluxagama/
+A simple Space Invaders-style game built with PyGame. It's intentionally basic - perfect for learning game development concepts.
 
-Development
------------
-Run `make` to install dependencies, execute linters and tests, and build a
-wheel in `dist/`.
+## What's Implemented
 
-## Who Is This For?
-
-- Python developers interested in game development
-- Students learning PyGame and game programming concepts
-- Anyone interested in exploring open-source game development
-
-## Current Implementation Status
-- ✅ Player ship movement and controls
-- ✅ Enemy spawning and basic AI
-- ✅ Shooting mechanics
-- ✅ Collision detection
-- ✅ Basic sound effects
+- ✅ Player ship movement and shooting
+- ✅ Static enemy formations
+- ✅ Collision detection (shoot the enemies!)
 - ✅ Score tracking
-- 🚧 Multiple weapon types
-- 🚧 Boss enemies
-- 📋 Level progression system
-- 📋 Power-ups and upgrades
+- ✅ Sound effects
+- ✅ Basic explosion graphics
 
-## Setup Instructions
+## What's NOT Implemented
 
-### Prerequisites
-- Python 3.x
-- PyGame library
-- Basic understanding of Python programming
+The enemies don't move or shoot back - they just sit there waiting to be destroyed. Think of it as a shooting gallery in space. All those GitHub issues from 2012? Those were meant as exercises we never got around to.
 
-### Installation
-1. Clone the repository:
+## Quick Start
+
+1. Install dependencies:
    ```
-   git clone https://github.com/nczempin/fluxagama.git
-   cd fluxagama
+   pip install -r requirements.txt
    ```
 
-2. Install PyGame if you don't have it already:
+2. Run the game:
    ```
-   pip install pygame
+   make run
    ```
-
-### Running the Game
-1. Navigate to the source directory:
-   ```
-   cd src
-   ```
-
-2. Run the main game file:
+   or
    ```
    python -m fluxagama.fluxagama
    ```
 
-## Project Scope
+## Controls
 
-### What This IS
-- A 2D vertical shooter game with classic arcade mechanics
-- A demonstration of PyGame development techniques
-- An open-source game project for learning and entertainment
+- **A/D** or **Arrow Keys**: Move left/right
+- **Space**: Shoot
+- **Escape**: Exit game
+- **E**: Debug feature (manual enemy shot)
 
-### What This IS NOT
-- Not a commercial-grade game with extensive features
-- Not optimized for all platforms and screen sizes
-- Not a complete game engine or framework
+## Development
+
+Run `make` to install dependencies, run linters and tests, and build a wheel.
 
 ## Repository Structure
-- `src/fluxagama/` - Main game source code
-  - `fluxagama.py` - Main game loop and initialization
-  - `PlayerShip.py` - Player ship class and controls
-  - `Enemy.py` - Enemy ship classes and behaviors
-  - `Shot.py` - Projectile mechanics
-  - `FluxaSprite.py` - Base sprite class
-  - `explosion.py` - Explosion effects
-  - `sound.py` - Sound effect handling
-  - `graphics.py` - Graphics utilities
-  - `text.py` - Text rendering
-  - `constants.py` - Game constants and configuration
-- `tests/` - Test files for game components
 
-## Controls
-- Arrow keys: Move the player ship
-- Space: Fire weapon
-- Escape: Pause/Menu
+- `src/fluxagama/` - Game source code
+- `data/` - Game assets (sprites and sounds)
+- `tests/` - Test files
+- `scripts/` - Setup scripts
 
-## Play Online
-(not yet) You can play the game online at: http://nczempin.github.com/fluxagama/
+---
 
-## Development Status
-This is an open-source game project in semi-active development. Contributions and feedback are welcome.
+*Originally created as an educational project around 2012.*

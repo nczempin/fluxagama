@@ -100,9 +100,9 @@ def game_loop():
         if keystate[K_ESCAPE] == 1:
             done = True
             break
-        if keystate[K_a] == 1:
+        if keystate[K_a] == 1 or keystate[K_LEFT] == 1:
             ship_sprite.move_left()
-        if keystate[K_d] == 1:
+        if keystate[K_d] == 1 or keystate[K_RIGHT] == 1:
             ship_sprite.move_right()
         if keystate[K_SPACE] == 1:
             if not shot_exists:
